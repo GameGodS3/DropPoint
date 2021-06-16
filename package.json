@@ -1,0 +1,15 @@
+{
+  "name": "droppoint_gui_electron",
+  "version": "0.1.0",
+  "description": "Drag-and-drop assist",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sudev Suresh Sreedevi",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^13.1.2"
+  }
+}

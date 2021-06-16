@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DropPoint</title>
+  </head>
+  <body>
+    <div id="droppoint">
+      <div class="upload">
+        <img src="./upload.png" alt="Upload Here" style="opacity: 0.8" /> Drop
+        Your Files here
+      </div>
+      <div id="drag">
+        <img src="./document.png" alt="Upload Here" style="opacity: 0.8" />
+        Drag these files out
+      </div>
+    </div>
+  </body>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    html {
+      top: 0;
+      left: 0;
+      width: fit-content;
+      height: fit-content;
+    }
+    body {
+      width: 100vw;
+      height: 100vh;
+      -webkit-app-region: drag;
+    }
+
+    @keyframes dragged {
+      from {
+        border-radius: 100px;
+        border: 2px dashed #050a0f00;
+      }
+      to {
+        border-radius: 6px;
+        border: 2px dashed #050a0f85;
+      }
+    }
+    .dragged {
+      cursor: grabbing;
+      animation: dragged 0.5s forwards;
+      /* transition: all 0.25s ease-in-out; */
+    }
+    #droppoint {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-55%, -60%);
+      width: 140px;
+      height: 140px;
+      margin: 8px;
+      color: #050a0fa2;
+      user-select: none;
+      -webkit-app-region: no-drag;
+      transition: all 0.5s ease-in-out;
+    }
+    .upload {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      text-align: center;
+      flex-direction: column;
+      font-family: sans-serif;
+      align-items: center;
+      justify-content: center;
+    }
+
+    img {
+      max-width: 60px;
+      padding: 8px;
+    }
+
+    #drag {
+      height: 100%;
+      width: 100%;
+      display: none;
+      text-align: center;
+      flex-direction: column;
+      font-family: sans-serif;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+  <script src="renderer.js"></script>
+</html>
