@@ -24,7 +24,7 @@ Works on Windows, Linux and MacOS
 
 1. Clone repo and change into directory
    ```bash
-   git clone https://github.com/GameGodS3/DropPoint
+   git clone https://github.com/GameGodS3/DropPoint.git
    cd DropPoint
    ```
 2. Install dependencies and run
