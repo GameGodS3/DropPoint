@@ -1,8 +1,8 @@
-var filepath;
-var filetype;
-var holder = document.getElementById("droppoint");
-var dragin = document.getElementsByClassName("upload")[0];
-var dragout = document.getElementById("drag");
+let filepath;
+let filetype;
+let holder = document.getElementById("droppoint");
+let dragin = document.getElementsByClassName("upload")[0];
+let dragout = document.getElementById("drag");
 
 (function () {
   holder.ondragover = (e) => {
@@ -54,3 +54,11 @@ document.getElementById("drag").ondragstart = (event) => {
   dragin.style.display = "flex";
   dragout.style.display = "none";
 };
+
+// Close/clear button
+document.querySelector(".close").addEventListener("click", (e) => {
+  e.preventDefault();
+  window.electron.minimise();
+  dragin.style.display = "flex";
+  dragout.style.display = "none";
+});

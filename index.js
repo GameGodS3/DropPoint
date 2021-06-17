@@ -11,8 +11,8 @@ const {
 const path = require("path");
 
 // Quit/Minimize to tray control variables
-var isQuiting;
-var tray;
+let isQuiting;
+let tray;
 
 // Main Window
 function createMainWindow() {
@@ -73,28 +73,39 @@ function createMainWindow() {
   });
 
   // Drag out function
-  ipcMain.on("ondragstart", (event, filePath, fileType) => {
-    if (fileType != "application") {
-      fileType = fileType + ".png";
-    } else {
-      fileType = "file.png";
-    }
-    event.sender.startDrag({
-      file: filePath,
-      icon: nativeImage
-        .createFromPath(__dirname + "/" + fileType)
-        .resize({ width: 200 }),
-    });
-    if (isQuiting) {
-      app.quit();
-    } else {
+  ipcMain
+    .on("ondragstart", (event, filePath, fileType) => {
+      if (fileType != "application") {
+        fileType = fileType + ".png";
+      } else {
+        fileType = "file.png";
+      }
+      event.sender.startDrag({
+        file: filePath,
+        icon: nativeImage
+          .createFromPath(__dirname + "/" + fileType)
+          .resize({ width: 200 }),
+      });
+      if (isQuiting) {
+        app.quit();
+      } else {
+        win.hide();
+      }
+    })
+    .on("minimise", () => {
       win.hide();
-    }
-  });
+    });
 
   // Global shortcut
-  const ret = globalShortcut.register("CommandOrControl+Shift+Q", () => {
-    win.show();
+  let visible = true;
+  const ret = globalShortcut.register("Shift+Capslock", () => {
+    if (visible) {
+      win.hide();
+      visible = false;
+    } else {
+      win.show();
+      visible = true;
+    }
   });
   if (!ret) {
     console.log("KeyboardShorcutError");

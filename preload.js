@@ -5,6 +5,9 @@ contextBridge.exposeInMainWorld("electron", {
   startDrag: (filepath, filetype) => {
     ipcRenderer.send("ondragstart", filepath, filetype);
   },
+  minimise: () => {
+    ipcRenderer.send("minimise");
+  },
 });
 
 console.log("preload");

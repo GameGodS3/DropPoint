@@ -16,6 +16,7 @@
         background-color: hsl(40, 100%, 97%);
       "
     >
+      <div class="close">&#215;</div>
       <div id="droppoint">
         <div class="upload">
           <img src="./upload.png" alt="Upload Here" style="opacity: 0.8" />
@@ -44,7 +45,22 @@
       width: 100vw;
       height: 100vh;
     }
-
+    .close {
+      width: 1rem;
+      height: 1rem;
+      font-size: 0.8rem;
+      display: flex;
+      background-color: #c0c0c0;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      right: 5%;
+      top: 5%;
+      border-radius: 2rem;
+      z-index: 10;
+      cursor: pointer;
+      -webkit-app-region: no-drag;
+    }
     @keyframes dragged {
       from {
         border-radius: 100px;
