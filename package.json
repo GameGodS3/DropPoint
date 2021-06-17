@@ -12,7 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sudev Suresh Sreedevi",
-  "license": "MIT",
+  "license": "GNU GPL v3.0",
   "dependencies": {},
   "devDependencies": {
     "electron": "^13.1.2",
