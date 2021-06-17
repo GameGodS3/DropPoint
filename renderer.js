@@ -1,10 +1,10 @@
 var filepath;
 var filetype;
+var holder = document.getElementById("droppoint");
+var dragin = document.getElementsByClassName("upload")[0];
+var dragout = document.getElementById("drag");
 
 (function () {
-  var holder = document.getElementById("droppoint");
-  var dragin = document.getElementsByClassName("upload")[0];
-  var dragout = document.getElementById("drag");
   holder.ondragover = (e) => {
     e.preventDefault;
     e.stopPropagation;
@@ -51,4 +51,6 @@ var filetype;
 document.getElementById("drag").ondragstart = (event) => {
   event.preventDefault();
   window.electron.startDrag(filepath, filetype);
+  dragin.style.display = "flex";
+  dragout.style.display = "none";
 };
