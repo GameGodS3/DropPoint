@@ -1,13 +1,24 @@
-const { app, BrowserWindow, ipcMain, nativeImage } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  ipcMain,
+  nativeImage,
+  screen,
+} = require("electron");
 const path = require("path");
 const fs = require("fs");
 
 // Drag out function
-ipcMain.on("ondragstart", (event, filePath) => {
+ipcMain.on("ondragstart", (event, filePath, fileType) => {
+  if (fileType != "application") {
+    fileType = fileType + ".png";
+  } else {
+    fileType = "file.png";
+  }
   event.sender.startDrag({
     file: filePath,
     icon: nativeImage
-      .createFromPath(__dirname + "/document.png")
+      .createFromPath(__dirname + "/" + fileType)
       .resize({ width: 200 }),
   });
   app.quit();
@@ -15,11 +26,17 @@ ipcMain.on("ondragstart", (event, filePath) => {
 
 // Main Window
 function createMainWindow() {
+  let display = screen.getPrimaryDisplay();
+  let height = display.bounds.height;
+  let width = display.bounds.width;
   const win = new BrowserWindow({
     width: 200,
     height: 200,
+    x: width / 2 - 100,
+    y: 0,
     frame: false,
     titleBarStyle: "hidden",
+    transparent: true,
     alwaysOnTop: true,
     resizable: false,
     webPreferences: {

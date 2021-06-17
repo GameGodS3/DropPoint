@@ -7,14 +7,24 @@
     <title>DropPoint</title>
   </head>
   <body>
-    <div id="droppoint">
-      <div class="upload">
-        <img src="./upload.png" alt="Upload Here" style="opacity: 0.8" /> Drop
-        Your Files here
-      </div>
-      <div id="drag">
-        <img src="./document.png" alt="Upload Here" style="opacity: 0.8" />
-        Drag these files out
+    <div
+      style="
+        -webkit-app-region: drag;
+        border-radius: 0.5rem;
+        width: 100%;
+        height: 100%;
+        background-color: hsl(40, 100%, 97%);
+      "
+    >
+      <div id="droppoint">
+        <div class="upload">
+          <img src="./upload.png" alt="Upload Here" style="opacity: 0.8" />
+          Drop Your File Here
+        </div>
+        <div id="drag">
+          <img alt="Upload Here" style="opacity: 0.8" />
+          Drag Your File Out
+        </div>
       </div>
     </div>
   </body>
@@ -33,7 +43,6 @@
     body {
       width: 100vw;
       height: 100vh;
-      -webkit-app-region: drag;
     }
 
     @keyframes dragged {
@@ -55,12 +64,13 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-55%, -60%);
+      transform: translate(-55%, -55%);
       width: 140px;
       height: 140px;
       margin: 8px;
       color: #050a0fa2;
       user-select: none;
+      border: 2px transparent solid;
       -webkit-app-region: no-drag;
       transition: all 0.5s ease-in-out;
     }

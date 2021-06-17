@@ -1,4 +1,5 @@
 var filepath;
+var filetype;
 
 (function () {
   var holder = document.getElementById("droppoint");
@@ -33,6 +34,12 @@ var filepath;
     holder.removeAttribute("class");
     for (let f of e.dataTransfer.files) {
       console.log("Files dragged: ", f.path);
+      filetype = f.type.split("/")[0];
+      if (filetype != "application") {
+        document.querySelector("#drag img").src = filetype + ".png";
+      } else {
+        document.querySelector("#drag img").src = "file.png";
+      }
       filepath = f.path.toString();
       dragin.style.display = "none";
       dragout.style.display = "flex";
@@ -43,5 +50,5 @@ var filepath;
 
 document.getElementById("drag").ondragstart = (event) => {
   event.preventDefault();
-  window.electron.startDrag(filepath);
+  window.electron.startDrag(filepath, filetype);
 };

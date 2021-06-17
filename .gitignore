@@ -1,2 +1,4 @@
 /node_modules/
 /node_modules/*
+/release_builds/
+build_installer.js
