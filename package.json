@@ -1,7 +1,7 @@
 {
-  "name": "drop_point",
-  "productName": "drop_point",
-  "version": "1.0.13",
+  "name": "droppoint",
+  "productName": "droppoint",
+  "version": "1.0.1",
   "description": "Drag-and-drop assist",
   "main": "index.js",
   "scripts": {

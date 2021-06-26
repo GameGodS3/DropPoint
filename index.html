@@ -16,7 +16,7 @@
         background-color: hsl(40, 100%, 97%);
       "
     >
-      <div class="close">&#215;</div>
+      <div class="close" title="Clear">&#215;</div>
       <div id="droppoint">
         <div class="upload">
           <img
@@ -24,11 +24,13 @@
             alt="Upload Here"
             style="opacity: 0.8; pointer-events: none"
           />
-          Drop Your File Here
+          Drop Your File(s) Here
         </div>
         <div id="drag">
-          <img alt="Upload Here" style="opacity: 0.8" />
-          Drag Your File Out
+          <div class="file-icon">
+            <img alt="Upload Here" style="opacity: 0.8" class="files" />
+          </div>
+          Drag Your <num></num> File(s) Out
         </div>
       </div>
     </div>
@@ -38,6 +40,25 @@
       padding: 0;
       margin: 0;
       box-sizing: border-box;
+    }
+    /* Tilt animation keyframes for multiple files */
+    @keyframes tilt {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(25deg);
+        transform-origin: bottom;
+      }
+    }
+    @keyframes tiltmore {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(50deg);
+        transform-origin: bottom;
+      }
     }
     html {
       top: 0;
@@ -121,6 +142,16 @@
       font-family: sans-serif;
       align-items: center;
       justify-content: center;
+    }
+    .file-icon {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .files {
+      position: absolute;
     }
   </style>
   <script src="renderer.js"></script>
