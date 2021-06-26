@@ -1,0 +1,2 @@
+- name: Electron Builder Action
+  uses: samuelmeuli/action-electron-builder@v1.6.0

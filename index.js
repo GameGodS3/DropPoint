@@ -14,6 +14,9 @@ const path = require("path");
 let isQuiting;
 let tray;
 
+// Code for auto updates
+const autoUpdater = require("electron-updater");
+
 // Main Window
 function createMainWindow() {
   let display = screen.getPrimaryDisplay();
@@ -124,6 +127,7 @@ app.whenReady().then(createMainWindow);
 
 // When the application get activated, create main window if one does not exist
 app.on("activate", () => {
+  autoUpdater.checkForUpdatesAndNotify();
   if (BrowserWindow.getAllWindows.length === 0) {
     createMainWindow();
   }

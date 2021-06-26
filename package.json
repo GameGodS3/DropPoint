@@ -1,21 +1,77 @@
 {
-  "name": "droppoint_gui_electron",
-  "version": "1.0.0",
+  "name": "drop_point",
+  "productName": "drop_point",
+  "version": "1.0.13",
   "description": "Drag-and-drop assist",
   "main": "index.js",
   "scripts": {
-    "start": "electron .",
-    "build-win32": "electron-packager . droppoint --overwrite --platform=win32 --icon=disc.png --prune=true --out=release_builds --version-string.CompanyName='Sudev Suresh Sreedevi' --version-string.ProductName='DropPoint'",
-    "build-linux": "electron-packager . droppoint --overwrite --platform=linux --icon=disc.png --prune=true --out=release_builds --version-string.CompanyName='Sudev Suresh Sreedevi' --version-string.ProductName='DropPoint'",
-    "build-mac": "electron-packager . droppoint --overwrite --platform=darwin --icon=disc.png --prune=true --out=release_builds --version-string.CompanyName='Sudev Suresh Sreedevi' --version-string.ProductName='DropPoint'",
-    "build-all": "electron-packager . droppoint --overwrite --platform=all --icon=disc.png --prune=true --out=release_builds --version-string.CompanyName='Sudev Suresh Sreedevi' --version-string.ProductName='DropPoint'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
   },
-  "author": "Sudev Suresh Sreedevi",
+  "keywords": [],
+  "author": {
+    "name": "Sudev Suresh Sreedevi",
+    "email": "sudevssuresh@gmail.com"
+  },
   "license": "GNU GPL v3.0",
-  "dependencies": {},
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "DropPoint"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-dmg",
+          "config": {
+            "background": "./disc.png",
+            "format": "ULFO"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip"
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ],
+      "publishers": [
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "AJAYK-01",
+              "name": "DropPoint",
+              "draft": true
+            }
+          }
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-updater": "^4.3.9"
+  },
   "devDependencies": {
-    "electron": "^13.1.2",
-    "electron-packager": "^15.2.0"
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-dmg": "^6.0.0-beta.57",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "@electron-forge/publisher-github": "^6.0.0-beta.54",
+    "electron": "^13.1.2"
   }
 }
