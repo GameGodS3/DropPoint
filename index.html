@@ -19,7 +19,11 @@
       <div class="close">&#215;</div>
       <div id="droppoint">
         <div class="upload">
-          <img src="./upload.png" alt="Upload Here" style="opacity: 0.8" />
+          <img
+            src="./upload.png"
+            alt="Upload Here"
+            style="opacity: 0.8; pointer-events: none"
+          />
           Drop Your File Here
         </div>
         <div id="drag">
@@ -59,6 +63,7 @@
       border-radius: 2rem;
       z-index: 10;
       cursor: pointer;
+      user-select: none;
       -webkit-app-region: no-drag;
     }
     @keyframes dragged {
@@ -97,6 +102,7 @@
       text-align: center;
       flex-direction: column;
       font-family: sans-serif;
+      user-select: none;
       align-items: center;
       justify-content: center;
     }

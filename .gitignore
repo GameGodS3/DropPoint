@@ -2,3 +2,4 @@
 /node_modules/*
 /release_builds/
 build_installer.js
+test.html

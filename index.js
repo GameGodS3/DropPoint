@@ -37,6 +37,8 @@ function createMainWindow() {
 
   // Window Content
   win.loadFile(path.join(__dirname, "index.html"));
+  win.setVisibleOnAllWorkspaces(true);
+  win.shadow = true;
   // win.webContents.openDevTools();
   win.removeMenu();
 
