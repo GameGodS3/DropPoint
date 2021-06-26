@@ -1,6 +1,6 @@
 {
-  "name": "droppoint_gui_electron",
-  "version": "1.0.0",
+  "name": "droppoint",
+  "version": "1.0.1",
   "description": "Drag-and-drop assist",
   "main": "index.js",
   "scripts": {

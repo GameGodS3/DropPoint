@@ -26,8 +26,8 @@ function createMainWindow() {
     frame: false,
     titleBarStyle: "hidden",
     transparent: true,
-    alwaysOnTop: true,
     resizable: false,
+    alwaysOnTop: true,
     webPreferences: {
       nodeIntegration: true,
       preload: path.join(__dirname, "preload.js"),
@@ -76,17 +76,27 @@ function createMainWindow() {
 
   // Drag out function
   ipcMain
-    .on("ondragstart", (event, filePath, fileType) => {
-      if (fileType != "application") {
-        fileType = fileType + ".png";
+    .on("ondragstart", (event, fileList) => {
+      let fileType;
+      if (fileList.length <= 1) {
+        fileType = fileList[0]["fileType"];
+        if (fileType != "application") {
+          fileType = fileType + ".png";
+        } else {
+          fileType = "file.png";
+        }
       } else {
-        fileType = "file.png";
+        fileType = "folder.png";
       }
+      let fileNameList = [];
+      fileList.forEach((element) => {
+        fileNameList.push(element["filePath"]);
+      });
       event.sender.startDrag({
-        file: filePath,
+        files: fileNameList,
         icon: nativeImage
           .createFromPath(__dirname + "/" + fileType)
-          .resize({ width: 200 }),
+          .resize({ width: 64 }),
       });
       if (isQuiting) {
         app.quit();
