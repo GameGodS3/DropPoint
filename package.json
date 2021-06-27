@@ -1,14 +1,14 @@
 {
   "name": "droppoint",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Drag-and-drop assist",
   "main": "index.js",
   "scripts": {
     "start": "electron .",
-    "build-win32": "electron-packager . droppoint --overwrite --platform=win32 --icon=disc.png --prune=true --out=release_builds --version-string.CompanyName='Sudev Suresh Sreedevi' --version-string.ProductName='DropPoint'",
-    "build-linux": "electron-packager . droppoint --overwrite --platform=linux --icon=disc.png --prune=true --out=release_builds --version-string.CompanyName='Sudev Suresh Sreedevi' --version-string.ProductName='DropPoint'",
-    "build-mac": "electron-packager . droppoint --overwrite --platform=darwin --icon=disc.png --prune=true --out=release_builds --version-string.CompanyName='Sudev Suresh Sreedevi' --version-string.ProductName='DropPoint'",
-    "build-all": "electron-packager . droppoint --overwrite --platform=all --icon=disc.png --prune=true --out=release_builds --version-string.CompanyName='Sudev Suresh Sreedevi' --version-string.ProductName='DropPoint'",
+    "build-win32": "electron-packager . droppoint --overwrite --platform=win32 --icon=droppoint.ico --prune=true --out=release_builds --version-string.CompanyName='Sudev Suresh Sreedevi' --version-string.ProductName='DropPoint'",
+    "build-linux": "electron-packager . droppoint --overwrite --platform=linux --icon=droppoint.ico --prune=true --out=release_builds --version-string.CompanyName='Sudev Suresh Sreedevi' --version-string.ProductName='DropPoint'",
+    "build-mac": "electron-packager . droppoint --overwrite --platform=darwin --icon=droppoint.icns --prune=true --out=release_builds --version-string.CompanyName='Sudev Suresh Sreedevi' --version-string.ProductName='DropPoint'",
+    "build-all": "electron-packager . droppoint --overwrite --platform=all --icon=droppoint.ico --prune=true --out=release_builds --version-string.CompanyName='Sudev Suresh Sreedevi' --version-string.ProductName='DropPoint'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sudev Suresh Sreedevi",

@@ -4,7 +4,7 @@ Drag-and-Drop Assist
 
 Make dragging and dropping across windows and virtual desktops/workspaces easier using DropPoint!
 
-DropPoint holds your file/folder temporarily so that you may navigate to a folder of your choice and drop it there.
+DropPoint holds your file(s)/folder temporarily so that you may navigate to a folder of your choice and drop it there.
 
 Works on Windows, Linux and MacOS.
 
@@ -18,7 +18,7 @@ Follows Fluent design style to match Windows 11 aesthetics :)
 
 ### Across windows in different virtual desktops/workspaces
 
-![Drag between windows](./demo2.gif)
+![Drag between desktops](./demo2.gif)
 
 ## Installation
 
@@ -34,7 +34,7 @@ Follows Fluent design style to match Windows 11 aesthetics :)
     npm install
     npm run
    ```
-   To enable stickyness across Virtual Desktops (Windows) go to Task view while DropPoint is running, right click it and tick "Show Window from this app on all Desktops". Stickyness in other OS under development.
+   To enable stickyness across Virtual Desktops (Windows) go to Task view while DropPoint is running, right click it and tick "Show Window from this app on all Desktops". Stickyness in other Operating Systems works by default.
 
 **Optional:** Although there are no official binary releases as of now, you may build your own by executing:
 
@@ -49,7 +49,7 @@ npm run build-all # for Windows, MacOS and Linux
 
 ## Usage
 
-- Drag and drop any file or folder from the system into DropPoint, go to your desired location and drag it out.
+- Drag and drop any file(s) or folder from the system into DropPoint, go to your desired location and drag it out.
 
 - App minimises to tray by default when you close the instance. To open instance, click on system tray. To quit, right click on tray icon > Quit. (as tested on Windows)
 
