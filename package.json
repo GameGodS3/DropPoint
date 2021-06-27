@@ -1,21 +1,50 @@
 {
   "name": "droppoint",
-  "version": "1.0.1",
+  "productName": "droppoint",
+  "version": "1.0.0",
   "description": "Drag-and-drop assist",
   "main": "index.js",
   "scripts": {
-    "start": "electron .",
-    "build-win32": "electron-packager . droppoint --overwrite --platform=win32 --icon=disc.png --prune=true --out=release_builds --version-string.CompanyName='Sudev Suresh Sreedevi' --version-string.ProductName='DropPoint'",
-    "build-linux": "electron-packager . droppoint --overwrite --platform=linux --icon=disc.png --prune=true --out=release_builds --version-string.CompanyName='Sudev Suresh Sreedevi' --version-string.ProductName='DropPoint'",
-    "build-mac": "electron-packager . droppoint --overwrite --platform=darwin --icon=disc.png --prune=true --out=release_builds --version-string.CompanyName='Sudev Suresh Sreedevi' --version-string.ProductName='DropPoint'",
-    "build-all": "electron-packager . droppoint --overwrite --platform=all --icon=disc.png --prune=true --out=release_builds --version-string.CompanyName='Sudev Suresh Sreedevi' --version-string.ProductName='DropPoint'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "electron-builder",
+    "release": "electron-builder --publish always"
   },
-  "author": "Sudev Suresh Sreedevi",
+  "keywords": [],
+  "author": {
+    "name": "Sudev Suresh Sreedevi",
+    "email": "sudevssuresh@gmail.com"
+  },
   "license": "GNU GPL v3.0",
-  "dependencies": {},
+  "build": {
+    "appId": "com.gamegods3.droppoint",
+    "productName": "DropPoint",
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "dmg": {
+      "icon": false
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "tar.gz",
+        "rpm"
+      ],
+      "category": "Utility"
+    },
+    "win": {
+      "publisherName": "Sudev Suresh Sreedevi",
+      "target": [
+        "zip",
+        "nsis"
+      ]
+    }
+  },
+  "dependencies": {
+    "electron-updater": "^4.3.9"
+  },
   "devDependencies": {
     "electron": "^13.1.2",
-    "electron-packager": "^15.2.0"
+    "electron-builder": "^22.11.7"
   }
 }
