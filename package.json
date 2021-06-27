@@ -1,15 +1,12 @@
 {
   "name": "droppoint",
   "productName": "droppoint",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Drag-and-drop assist",
   "main": "index.js",
   "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "build": "electron-builder",
+    "release": "electron-builder --publish always"
   },
   "keywords": [],
   "author": {
@@ -17,61 +14,37 @@
     "email": "sudevssuresh@gmail.com"
   },
   "license": "GNU GPL v3.0",
-  "config": {
-    "forge": {
-      "packagerConfig": {},
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "DropPoint"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-dmg",
-          "config": {
-            "background": "./disc.png",
-            "format": "ULFO"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-zip"
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
-        }
+  "build": {
+    "appId": "com.gamegods3.droppoint",
+    "productName": "DropPoint",
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "dmg": {
+      "icon": false
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "tar.gz",
+        "rpm"
       ],
-      "publishers": [
-        {
-          "name": "@electron-forge/publisher-github",
-          "config": {
-            "repository": {
-              "owner": "AJAYK-01",
-              "name": "DropPoint",
-              "draft": true
-            }
-          }
-        }
+      "category": "Utility"
+    },
+    "win": {
+      "publisherName": "Sudev Suresh Sreedevi",
+      "target": [
+        "zip",
+        "nsis"
       ]
     }
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0",
     "electron-updater": "^4.3.9"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.54",
-    "@electron-forge/maker-deb": "^6.0.0-beta.54",
-    "@electron-forge/maker-dmg": "^6.0.0-beta.57",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
-    "@electron-forge/maker-zip": "^6.0.0-beta.54",
-    "@electron-forge/publisher-github": "^6.0.0-beta.54",
-    "electron": "^13.1.2"
+    "electron": "^13.1.2",
+    "electron-builder": "^22.11.7"
   }
 }

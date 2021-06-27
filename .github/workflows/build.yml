@@ -5,35 +5,69 @@ jobs:
   build_on_linux:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@master
+    - name: Check out Git repository
+      uses: actions/checkout@v1
+
+    - name: Install libarchive-tools for pacman
+      run: |
+        sudo apt-get update -y && sudo apt-get install -y libarchive-tools
+
+    - name: Install Node.js, NPM and Yarn
+      uses: actions/setup-node@v1
       with:
         node-version: 14
-    - name: install dependencies
-      run: npm install
-    - name: build
-      run: npm run make
+
+    - name: Build/release Electron app
+      uses: samuelmeuli/action-electron-builder@v1
+      with:
+        # GitHub token, automatically provided to the action
+        # (No need to define this secret in the repo settings)
+        github_token: ${{ secrets.github_token }}
+
+        # If the commit is tagged with a version (e.g. "v1.0.0"),
+        # release the app after building
+        release: ${{ startsWith(github.ref, 'refs/tags/v') }}
 
   build_on_mac:
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@master
+    - name: Check out Git repository
+      uses: actions/checkout@v1
+
+    - name: Install Node.js, NPM and Yarn
+      uses: actions/setup-node@v1
       with:
         node-version: 14
-    - name: install dependencies
-      run: npm install
-    - name: build
-      run: npm run make
+
+    - name: Build/release Electron app
+      uses: samuelmeuli/action-electron-builder@v1
+      with:
+        # GitHub token, automatically provided to the action
+        # (No need to define this secret in the repo settings)
+        github_token: ${{ secrets.github_token }}
+
+        # If the commit is tagged with a version (e.g. "v1.0.0"),
+        # release the app after building
+        release: ${{ startsWith(github.ref, 'refs/tags/v') }}
       
   build_on_win:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@master
+    - name: Check out Git repository
+      uses: actions/checkout@v1
+
+    - name: Install Node.js, NPM and Yarn
+      uses: actions/setup-node@v1
       with:
         node-version: 14
-    - name: install dependencies
-      run: npm install
-    - name: build
-      run: npm run make
+
+    - name: Build/release Electron app
+      uses: samuelmeuli/action-electron-builder@v1
+      with:
+        # GitHub token, automatically provided to the action
+        # (No need to define this secret in the repo settings)
+        github_token: ${{ secrets.github_token }}
+
+        # If the commit is tagged with a version (e.g. "v1.0.0"),
+        # release the app after building
+        release: ${{ startsWith(github.ref, 'refs/tags/v') }}
