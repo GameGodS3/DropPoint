@@ -1,16 +1,25 @@
-# DropPoint
+<div style="text-align:center">
 
-Drag-and-Drop Assist
+![DropPoint](https://socialify.git.ci/GameGodS3/DropPoint/image?description=1&logo=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint%2Fblob%2Fmain%2Fdroppoint.ico%3Fraw%3Dtrue&owner=1&theme=Light)
 
-Make dragging and dropping across windows and virtual desktops/workspaces easier using DropPoint!
+[![GitHub license](https://img.shields.io/github/license/GameGodS3/DropPoint?style=flat-square)](https://github.com/GameGodS3/DropPoint/blob/main/LICENSE)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/GameGodS3/DropPoint/Build?style=flat-square)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/GameGodS3/DropPoint?style=flat-square)
+![GitHub repo size](https://img.shields.io/github/repo-size/GameGodS3/DropPoint?color=yellow&style=flat-square)
 
-DropPoint holds your file(s)/folder temporarily so that you may navigate to a folder of your choice and drop it there.
+[![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint)](https://twitter.com/intent/tweet?text=Checkout%20this%20cool%20project!&url=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint)
 
-Works on Windows, Linux and MacOS.
+</div>
+
+Make drag-and-drop easier using DropPoint!
+
+DropPoint helps you drag content without having to open side-by-side windows
+
+Works on **Windows**, **Linux** and **MacOS**.
 
 Follows Fluent design style to match Windows 11 aesthetics :)
 
-## Demo
+## :sparkles: Demo
 
 ### Across maximized windows in the same desktop
 
@@ -20,7 +29,9 @@ Follows Fluent design style to match Windows 11 aesthetics :)
 
 ![Drag between desktops](./demo2.gif)
 
-## Official Releases
+## :package: Official Releases
+
+Go to the [Releases Page](https://github.com/GameGodS3/DropPoint/releases) to download the latest releases
 
 - Windows
   - Download `DropPoint-1.x.x-win.zip` from Releases and extract to a blank folder. Run `DropPoint.exe`.
@@ -34,14 +45,14 @@ Follows Fluent design style to match Windows 11 aesthetics :)
   - Arch-based Distros (Manjaro, Arch, etc.): Download `droppoint-1.x.x.tar.gz`
   - RHEL-based Distros (Fedora, Red Hat, etc): Download `droppoint-1.x.x.x86_64.rpm`.
 
-## Usage
+## :v: Usage
 
 - Drag and drop any file(s) or folder from the system into DropPoint, go to your desired location and drag it out.
 
 - App minimises to tray by default when you close the instance. To open instance, click on system tray. To quit, right click on tray icon > Quit.
 - While DropPoint is in the system tray, pressing **Shift + Caps Lock** anywhere in you PC would toggle an instance of DropPoint. (as tested on Windows)
 
-## Developer Installation
+## :gear: Developer Installation
 
 **You must have NPM and Git installed in your PC**
 
@@ -58,9 +69,9 @@ Follows Fluent design style to match Windows 11 aesthetics :)
 
 **_Contributions are welcome!_**
 
-## Credits
+## :heart: Credits
 
-- [Ajay Krishna KV](https://github.com/AJAYK-01) for CI/CD and Releases
+- Huge thanks to [Ajay Krishna KV](https://github.com/AJAYK-01) for CI/CD and Releases
 - Fluent icons from [Icons8](https://icons8.com)
 
 ## Related
