@@ -1,4 +1,4 @@
-<div style="text-align:center">
+<span style="text-align:center">
 
 ![DropPoint](https://socialify.git.ci/GameGodS3/DropPoint/image?description=1&logo=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint%2Fblob%2Fmain%2Fdroppoint.ico%3Fraw%3Dtrue&owner=1&theme=Light)
 
@@ -9,7 +9,7 @@
 
 [![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint)](https://twitter.com/intent/tweet?text=Checkout%20this%20cool%20project!&url=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint)
 
-</div>
+</span>
 
 Make drag-and-drop easier using DropPoint!
 
@@ -23,11 +23,11 @@ Follows Fluent design style to match Windows 11 aesthetics :)
 
 ### Across maximized windows in the same desktop
 
-![Drag between windows](./demo1.gif)
+![Drag between windows](https://i.imgur.com/QkUPoOb.gif)
 
 ### Across windows in different virtual desktops/workspaces
 
-![Drag between desktops](./demo2.gif)
+![Drag between desktops](https://i.imgur.com/WElktc0.gif)
 
 ## :package: Official Releases
 

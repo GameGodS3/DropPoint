@@ -35,7 +35,7 @@ function createMainWindow() {
       nodeIntegration: true,
       preload: path.join(__dirname, "preload.js"),
     },
-    icon: path.join(__dirname, "droppoint.ico"),
+    icon: path.join(__dirname, "/media/ico/droppoint.ico"),
   });
 
   // Window Content
@@ -46,7 +46,7 @@ function createMainWindow() {
   win.removeMenu();
 
   // Tray code
-  tray = new Tray(path.join(__dirname, "/droppoint.ico"));
+  tray = new Tray(path.join(__dirname, "/media/ico/droppoint.ico"));
   tray.setContextMenu(
     Menu.buildFromTemplate([
       {
@@ -98,7 +98,7 @@ function createMainWindow() {
       event.sender.startDrag({
         files: fileNameList,
         icon: nativeImage
-          .createFromPath(__dirname + "/" + fileType)
+          .createFromPath(__dirname + "/media/png/" + fileType)
           .resize({ width: 64 }),
       });
       if (isQuiting) {

@@ -59,12 +59,13 @@ function clearDrag() {
       }
       // If the filetype does not belong to the available JavaScript filetypes
       if (filetype === "") {
-        document.querySelector("#drag img").src = "file.png";
+        document.querySelector("#drag img").src = "./media/png/file.png";
         filetype = "application";
       } else if (filetype != "application") {
-        document.querySelector("#drag img").src = filetype + ".png";
+        document.querySelector("#drag img").src =
+          "./media/png/" + filetype + ".png";
       } else {
-        document.querySelector("#drag img").src = "file.png";
+        document.querySelector("#drag img").src = "./media/png/file.png";
       }
       filepath = f.path.toString();
       let filedict = {
@@ -81,22 +82,22 @@ function clearDrag() {
     // Animations for multiple file input
     dragicons = document.getElementsByClassName("files");
     if (filelist.length == 2) {
-      dragicons[0].src = "./file.png";
+      dragicons[0].src = "./media/png/file.png";
       let newimg = document.createElement("img");
-      newimg.src = "./file.png";
+      newimg.src = "./media/png/file.png";
       newimg.className = "files";
       fileicons.appendChild(newimg);
       dragicons[0].style = "animation: tilt 0.5s forwards";
       newimg.style = "filter: drop-shadow(3px 3px 5px #0a0a0942);";
     } else if (filelist.length > 2) {
-      dragicons[0].src = "./file.png";
+      dragicons[0].src = "./media/png/file.png";
       // ProtoImg and NewImg are required in case user drags in more than 2 files initially itself
       let protoimg = document.createElement("img");
-      protoimg.src = "./file.png";
+      protoimg.src = "./media/png/file.png";
       protoimg.className = "files";
       fileicons.appendChild(protoimg);
       let newimg = document.createElement("img");
-      newimg.src = "./file.png";
+      newimg.src = "./media/png/file.png";
       newimg.className = "files";
       fileicons.appendChild(newimg);
       dragicons[0].style = "animation: tiltmore 0.5s forwards";
