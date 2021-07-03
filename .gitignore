@@ -1,5 +1,6 @@
 /node_modules/
 /node_modules/*
 /release_builds/
+package-lock.js
 build_installer.js
 test.html
