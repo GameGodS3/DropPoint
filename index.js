@@ -16,6 +16,7 @@ let tray;
 
 // Code for auto updates
 const autoUpdater = require("electron-updater");
+const { platform } = require("os");
 
 // Main Window
 function createMainWindow() {
@@ -35,7 +36,9 @@ function createMainWindow() {
       nodeIntegration: true,
       preload: path.join(__dirname, "preload.js"),
     },
-    icon: path.join(__dirname, "/media/ico/droppoint.ico"),
+    icon: nativeImage.createFromPath(
+      path.join(__dirname, "/media/png/droppoint-symbolic.png")
+    ),
   });
 
   // Window Content
@@ -46,7 +49,16 @@ function createMainWindow() {
   win.removeMenu();
 
   // Tray code
-  tray = new Tray(path.join(__dirname, "/media/ico/droppoint.ico"));
+  let trayIcon;
+  // Linux needs different icon for tray
+  if (process.platform != "linux") {
+    trayIcon = path.join(__dirname, "/media/ico/droppoint.ico");
+  } else {
+    trayIcon = nativeImage
+      .createFromPath(path.join(__dirname, "/media/png/dropoint-symbolic.png"))
+      .resize({ width: 16 });
+  }
+  tray = new Tray(trayIcon);
   tray.setContextMenu(
     Menu.buildFromTemplate([
       {
@@ -64,11 +76,13 @@ function createMainWindow() {
       },
     ])
   );
-  tray.setToolTip("DropPoint");
+
   tray.on("click", () => {
     win.show();
   });
 
+  tray.setToolTip("DropPoint");
+  // On clicking close, hide window to tray instead of quitting
   win.on("close", (e) => {
     if (!isQuiting) {
       e.preventDefault();
@@ -81,6 +95,7 @@ function createMainWindow() {
   ipcMain
     .on("ondragstart", (event, fileList) => {
       let fileType;
+      // Assigning file icons according to type. If multiple files, use multifile icon.
       if (fileList.length <= 1) {
         fileType = fileList[0]["fileType"];
         if (fileType != "application") {
@@ -91,12 +106,12 @@ function createMainWindow() {
       } else {
         fileType = "multifile.png";
       }
-      let fileNameList = [];
+      let filePathList = [];
       fileList.forEach((element) => {
-        fileNameList.push(element["filePath"]);
+        filePathList.push(element["filePath"]);
       });
       event.sender.startDrag({
-        files: fileNameList,
+        files: filePathList,
         icon: nativeImage
           .createFromPath(__dirname + "/media/png/" + fileType)
           .resize({ width: 64 }),
