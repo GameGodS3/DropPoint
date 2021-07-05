@@ -14,7 +14,7 @@
     "name": "Sudev Suresh Sreedevi",
     "email": "sudevssuresh@gmail.com"
   },
-  "license": "GNU GPL v3.0",
+  "license": "GPL-3.0-or-later",
   "build": {
     "appId": "com.gamegods3.droppoint",
     "productName": "DropPoint",
