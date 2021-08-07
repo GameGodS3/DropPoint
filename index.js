@@ -46,6 +46,8 @@ function createMainWindow() {
   win.removeMenu();
 
   // Tray code
+  // TODO: Try PNG for support in Linux
+  // FIXME: Tray icon support in Linux
   tray = new Tray(path.join(__dirname, "/media/ico/droppoint.ico"));
   tray.setContextMenu(
     Menu.buildFromTemplate([
