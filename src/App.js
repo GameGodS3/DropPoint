@@ -1,6 +1,6 @@
 const { app, BrowserWindow } = require("electron");
 const { autoUpdater } = require("electron-updater");
-const createMainWindow = require("./Window");
+const { createMainWindow } = require("./Window");
 
 app.whenReady().then(createMainWindow);
 
@@ -10,3 +10,5 @@ app.on("activate", () => {
     createMainWindow();
   }
 });
+
+module.exports = { whenReady: app.whenReady };

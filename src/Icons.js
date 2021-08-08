@@ -1,11 +1,8 @@
-// import { nativeImage } from "electron";
-// import { path } from path;
-
-const { nativeImage } = require("electron");
 const path = require("path");
 
 let convertToNative = (imageName) => {
-  return nativeImage.createFromPath(path.join("../media/", imageName));
+  let icon = path.join(__dirname, "../static/media/", imageName);
+  return icon;
 };
 
 let droppointDefaultIcon = convertToNative("droppoint.ico");
@@ -18,14 +15,14 @@ let multifile = convertToNative("multifile.png");
 let text = convertToNative("text.png");
 let video = convertToNative("video.png");
 
-// export {
-//   droppointDefaultIcon,
-//   droppointMacIcon,
-//   audio,
-//   file,
-//   folder,
-//   image,
-//   multifile,
-//   text,
-//   video,
-// };
+module.exports = {
+  droppointDefaultIcon: droppointDefaultIcon,
+  droppointMacIcon: droppointMacIcon,
+  audio: audio,
+  file: file,
+  folder: folder,
+  image: image,
+  multifile: multifile,
+  text: text,
+  video: video,
+};

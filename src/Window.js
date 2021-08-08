@@ -1,8 +1,5 @@
-// import { BrowserWindow, nativeImage, screen } from "electron";
-// import { path } from "path";
-// import { droppointDefaultIcon } from "./Icons";
-
-const { BrowserWindow, nativeImage, screen } = require("electron");
+const { exception } = require("console");
+const { BrowserWindow, screen, nativeImage } = require("electron");
 const path = require("path");
 const { droppointDefaultIcon } = require("./Icons");
 
@@ -20,8 +17,15 @@ let defaultWindowConfig = {
     nodeIntegration: true,
     preload: path.join(__dirname, "preload.js"),
   },
-  icon: droppointDefaultIcon,
+
+  icon: nativeImage.createFromPath(droppointDefaultIcon),
 };
+
+function devConfig() {
+  defaultWindowConfig.resizable = true;
+  defaultWindowConfig.frame = true;
+  defaultWindowConfig.titleBarStyle = "default";
+}
 
 function createMainWindow(debug) {
   let win;
@@ -29,20 +33,19 @@ function createMainWindow(debug) {
   defaultWindowConfig.x = width / 2 - 100;
 
   if (debug) {
-    defaultWindowConfig.resizable = true;
-    defaultWindowConfig.frame = true;
-    defaultWindowConfig.titleBarStyle = "default";
+    devConfig();
     win = new BrowserWindow(defaultWindowConfig);
     win.webContents.openDevTools();
   } else {
     win = new BrowserWindow(defaultWindowConfig);
   }
-  console.log(path.join(__dirname, "../index.html"));
 
-  win.loadFile(path.join(__dirname, "../index.html"));
+  win.loadFile(path.join(__dirname, "../static/index.html"));
   win.setVisibleOnAllWorkspaces(true);
   win.shadow = true;
   win.removeMenu();
 }
 
-// export { createMainWindow };
+module.exports = {
+  createMainWindow: createMainWindow,
+};
