@@ -1,7 +1,8 @@
-const { exception } = require("console");
 const { BrowserWindow, screen, nativeImage } = require("electron");
 const path = require("path");
+
 const { droppointDefaultIcon } = require("./Icons");
+require("./RequestHandlers");
 
 let defaultWindowConfig = {
   width: 200,

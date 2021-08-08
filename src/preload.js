@@ -2,7 +2,7 @@ const { contextBridge, ipcRenderer } = require("electron");
 // const path = require("path");
 
 contextBridge.exposeInMainWorld("electron", {
-  startDrag: (filelist) => {
+  dragOutListener: (filelist) => {
     ipcRenderer.send("ondragstart", filelist);
   },
   minimise: () => {
