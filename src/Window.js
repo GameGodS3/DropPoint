@@ -1,3 +1,5 @@
+global.DROPPOINT_MAIN = null;
+
 const { BrowserWindow, screen, nativeImage } = require("electron");
 const path = require("path");
 
@@ -28,7 +30,6 @@ function devConfig() {
   defaultWindowConfig.titleBarStyle = "default";
 }
 
-global.DROPPOINT_MAIN = null;
 function createMainWindow(debug) {
   let width = screen.getPrimaryDisplay().bounds.width;
   defaultWindowConfig.x = width / 2 - 100;
@@ -45,6 +46,10 @@ function createMainWindow(debug) {
   DROPPOINT_MAIN.setVisibleOnAllWorkspaces(true);
   DROPPOINT_MAIN.shadow = true;
   DROPPOINT_MAIN.removeMenu();
+
+  DROPPOINT_MAIN.on("closed", () => {
+    DROPPOINT_MAIN = null;
+  });
 }
 
 module.exports = {

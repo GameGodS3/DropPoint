@@ -1,10 +1,10 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, nativeImage } = require("electron");
 const path = require("path");
 const { autoUpdater } = require("electron-updater");
 const { createMainWindow } = require("./Window");
 const { setShortcut } = require("./Shortcut");
-
-// app.whenReady().then(createMainWindow).then(setShortcut);
+const { droppointDefaultIcon } = require("./Icons");
+const { setTray } = require("./Tray");
 
 app.on("ready", () => {
   let splashScreen = new BrowserWindow({
@@ -13,6 +13,7 @@ app.on("ready", () => {
     frame: false,
     titleBarStyle: "hidden",
     transparent: true,
+    icon: nativeImage.createFromPath(droppointDefaultIcon),
   });
   splashScreen.loadFile(path.join(__dirname, "../static/media/splash.jpeg"));
   splashScreen.removeMenu();
@@ -22,13 +23,17 @@ app.on("ready", () => {
 
   createMainWindow();
   setShortcut();
+  setTray();
 });
 
-app.on("activate", () => {
-  autoUpdater.checkForUpdatesAndNotify();
-  if (BrowserWindow.getAllWindows.length === 0) {
-    createMainWindow();
-  }
-});
-
+app
+  .on("activate", () => {
+    autoUpdater.checkForUpdatesAndNotify();
+    if (BrowserWindow.getAllWindows.length === 0) {
+      createMainWindow();
+    }
+  })
+  .on("will-quit", () => {
+    globalShortcut.unregisterAll();
+  });
 module.exports = { whenReady: app.whenReady };

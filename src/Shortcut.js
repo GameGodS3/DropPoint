@@ -9,7 +9,6 @@ const setShortcut = () => {
   const ret = globalShortcut.register("Shift+Capslock", () => {
     if (DROPPOINT_MAIN) {
       DROPPOINT_MAIN.close();
-      DROPPOINT_MAIN = null;
     } else {
       createMainWindow();
     }

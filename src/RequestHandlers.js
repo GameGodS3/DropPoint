@@ -70,7 +70,6 @@ let dragHandler = ipcMain.on("ondragstart", (event, fileList) => {
  */
 let minimiseHandler = ipcMain.on("minimise", () => {
   DROPPOINT_MAIN.close();
-  DROPPOINT_MAIN = null;
 });
 
 module.exports = {
