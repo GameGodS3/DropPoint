@@ -7,6 +7,10 @@ let trayIcon = nativeImage
   .resize({ width: 16 });
 
 let tray;
+
+/**
+ * Sets system tray
+ */
 const setTray = () => {
   tray = new Tray(trayIcon);
   tray.setContextMenu(

@@ -25,12 +25,22 @@ let defaultWindowConfig = {
 };
 
 function devConfig() {
-  defaultWindowConfig.resizable = true;
   defaultWindowConfig.frame = true;
   defaultWindowConfig.titleBarStyle = "default";
+  defaultWindowConfig.resizable = true;
+  defaultWindowConfig.width = null;
+  defaultWindowConfig.height = null;
 }
 
-function createMainWindow(debug) {
+/**
+ * Creates a global instance of DropPoint when called.
+ * Only one instance of DropPoint at a time will be stable.
+ * Multiple instances may cause errors
+ *
+ * @param {Boolean} debug - pass "true" to get Debug settings
+ * @returns {Boolean} true if successful
+ */
+function createMainWindow(debug = false) {
   let width = screen.getPrimaryDisplay().bounds.width;
   defaultWindowConfig.x = width / 2 - 100;
 
@@ -50,6 +60,10 @@ function createMainWindow(debug) {
   DROPPOINT_MAIN.on("closed", () => {
     DROPPOINT_MAIN = null;
   });
+  if (DROPPOINT_MAIN) {
+    return true;
+  }
+  return false;
 }
 
 module.exports = {

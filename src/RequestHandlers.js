@@ -1,4 +1,4 @@
-const { ipcMain, BrowserWindow } = require("electron");
+const { ipcMain, nativeImage } = require("electron");
 global.share = { ipcMain };
 
 const {
@@ -55,14 +55,12 @@ let getFilePathList = (fileList) => {
 let dragHandler = ipcMain.on("ondragstart", (event, fileList) => {
   let fileType = getFileTypeIcons(fileList);
   let filePathList = getFilePathList(fileList);
-
+  let flag = false;
   event.sender.startDrag({
     files: filePathList,
-    icon: nativeImage
-      .createFromPath(__dirname + "/media/png/" + fileType)
-      .resize({ width: 64 }),
+    icon: nativeImage.createFromPath(fileType).resize({ width: 64 }),
   });
-  minimiseFocusedWindow();
+  DROPPOINT_MAIN.close();
 });
 
 /**
