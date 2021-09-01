@@ -17,6 +17,7 @@ function clearDrag() {
   }
   dragicons[0].removeAttribute("style");
 }
+
 (function () {
   holder.ondragover = (e) => {
     e.preventDefault;

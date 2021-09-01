@@ -2,7 +2,7 @@ const { BrowserWindow, screen, nativeImage } = require("electron");
 const path = require("path");
 
 const { droppointDefaultIcon } = require("./Icons");
-require("./RequestHandlers");
+require("./RequestHandlers"); // For Drag and Drop and Minimise handling
 
 let defaultWindowConfig = {
   width: 200,
@@ -28,23 +28,23 @@ function devConfig() {
   defaultWindowConfig.titleBarStyle = "default";
 }
 
+global.DROPPOINT_MAIN = null;
 function createMainWindow(debug) {
-  let win;
   let width = screen.getPrimaryDisplay().bounds.width;
   defaultWindowConfig.x = width / 2 - 100;
 
   if (debug) {
     devConfig();
-    win = new BrowserWindow(defaultWindowConfig);
-    win.webContents.openDevTools();
+    DROPPOINT_MAIN = new BrowserWindow(defaultWindowConfig);
+    DROPPOINT_MAIN.webContents.openDevTools();
   } else {
-    win = new BrowserWindow(defaultWindowConfig);
+    DROPPOINT_MAIN = new BrowserWindow(defaultWindowConfig);
   }
 
-  win.loadFile(path.join(__dirname, "../static/index.html"));
-  win.setVisibleOnAllWorkspaces(true);
-  win.shadow = true;
-  win.removeMenu();
+  DROPPOINT_MAIN.loadFile(path.join(__dirname, "../static/index.html"));
+  DROPPOINT_MAIN.setVisibleOnAllWorkspaces(true);
+  DROPPOINT_MAIN.shadow = true;
+  DROPPOINT_MAIN.removeMenu();
 }
 
 module.exports = {

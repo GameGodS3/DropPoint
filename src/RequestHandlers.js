@@ -1,51 +1,79 @@
 const { ipcMain, BrowserWindow } = require("electron");
 global.share = { ipcMain };
 
-let mainWindow;
+const {
+  audio,
+  file,
+  folder,
+  image,
+  multifile,
+  text,
+  video,
+} = require("./Icons");
 
 /**
  * Assigns file icons according to type. If multiple files, use multifile icon.
  * @param {Array} fileList The collection of files currently dragged into the window
  * @return {String} Name of icon according to filetype
  */
-let getFileTypeIcon = (fileList) => {
+let getFileTypeIcons = (fileList) => {
   let fileType;
   if (fileList.length <= 1) {
     fileType = fileList[0]["fileType"];
     if (fileType != "application") {
-      fileType = fileType + ".png";
+      fileType = eval("return " + fileType + ";");
     } else {
-      fileType = "file.png";
+      fileType = file;
     }
   } else {
-    fileType = "multifile.png";
+    fileType = multifile;
   }
   return fileType;
 };
 
-module.exports = {
-  dragHandler: global.share.ipcMain.on("ondragstart", (event, fileList) => {
-    let fileType = getFileTypeIcon(fileList);
-    let filePathList = [];
-    fileList.forEach((element) => {
-      filePathList.push(element["filePath"]);
-    });
-    event.sender.startDrag({
-      files: filePathList,
-      icon: nativeImage
-        .createFromPath(__dirname + "/media/png/" + fileType)
-        .resize({ width: 64 }),
-    });
-    if (isQuiting) {
-      app.quit();
-    } else {
-      mainWindow = BrowserWindow.getFocusedWindow();
-      mainWindow.hide();
-    }
-  }),
+/**
+ * Returns list of file paths of all the files in filelist.
+ * Necessary for startDrag API of electron
+ *
+ * @param {Array} fileList - List of files
+ * @return {Array} List of paths of files in fileList
+ */
+let getFilePathList = (fileList) => {
+  let filePathList = [];
+  fileList.forEach((element) => {
+    filePathList.push(element["filePath"]);
+  });
+  return filePathList;
+};
 
-  minimiseHandler: ipcMain.on("minimise", () => {
-    mainWindow = BrowserWindow.getFocusedWindow();
-    mainWindow.hide();
-  }),
+/**
+ * Activates Drag-and-Drop API of electron. Handles drag icon attributes.
+ * Minimises instance after operation
+ *
+ * @param {Array} fileList - List of files
+ */
+let dragHandler = ipcMain.on("ondragstart", (event, fileList) => {
+  let fileType = getFileTypeIcons(fileList);
+  let filePathList = getFilePathList(fileList);
+
+  event.sender.startDrag({
+    files: filePathList,
+    icon: nativeImage
+      .createFromPath(__dirname + "/media/png/" + fileType)
+      .resize({ width: 64 }),
+  });
+  minimiseFocusedWindow();
+});
+
+/**
+ * For minimising instance on clicking the button
+ */
+let minimiseHandler = ipcMain.on("minimise", () => {
+  DROPPOINT_MAIN.close();
+  DROPPOINT_MAIN = null;
+});
+
+module.exports = {
+  dragHandler: dragHandler,
+  minimiseHandler: minimiseHandler,
 };
