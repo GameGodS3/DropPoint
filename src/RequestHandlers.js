@@ -21,7 +21,7 @@ let getFileTypeIcons = (fileList) => {
   if (fileList.length <= 1) {
     fileType = fileList[0]["fileType"];
     if (fileType != "application") {
-      fileType = eval("return " + fileType + ";");
+      fileType = eval(fileType); //eval is used for using the string value in fileType as a variable
     } else {
       fileType = file;
     }
