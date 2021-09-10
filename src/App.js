@@ -22,10 +22,11 @@ app
     setTimeout(() => {
       splashScreen.hide();
     }, 3000);
-
-    if (createMainWindow()) {
-      setTray();
-      setShortcut();
+    if (BrowserWindow.getAllWindows.length === 0) {
+      if (createMainWindow()) {
+        setTray();
+        setShortcut();
+      }
     }
   })
   .on("activate", () => {
