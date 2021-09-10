@@ -1,7 +1,7 @@
 {
   "name": "droppoint",
   "productName": "DropPoint",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Drag-and-drop assist",
   "main": "./src/App.js",
   "scripts": {
