@@ -10,7 +10,6 @@ const icons = {
         ? convertToNative("droppoint.icns")
         : convertToNative("droppoint.ico")
       : convertToNative("pngLogo/droppoint.png"),
-  droppointMacIcon: convertToNative("droppoint.icns"),
   audio: convertToNative("audio.png"),
   file: convertToNative("file.png"),
   folder: convertToNative("folder.png"),
