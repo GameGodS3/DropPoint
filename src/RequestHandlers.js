@@ -1,15 +1,7 @@
 const { ipcMain, nativeImage } = require("electron");
 global.share = { ipcMain };
 
-const {
-  audio,
-  file,
-  folder,
-  image,
-  multifile,
-  text,
-  video,
-} = require("./Icons");
+const icons = require("./Icons");
 
 /**
  * Assigns file icons according to type. If multiple files, use multifile icon.
@@ -21,12 +13,12 @@ let getFileTypeIcons = (fileList) => {
   if (fileList.length <= 1) {
     fileType = fileList[0]["fileType"];
     if (fileType != "application") {
-      fileType = eval(fileType); //eval is used for using the string value in fileType as a variable
+      fileType = icons[fileType];
     } else {
-      fileType = file;
+      fileType = icons.file;
     }
   } else {
-    fileType = multifile;
+    fileType = icons.multifile;
   }
   return fileType;
 };
