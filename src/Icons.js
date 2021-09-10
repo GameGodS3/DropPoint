@@ -5,7 +5,10 @@ let convertToNative = (imageName) => {
   return icon;
 };
 
-let droppointDefaultIcon = convertToNative("droppoint.ico");
+let droppointDefaultIcon =
+  process.platform !== "linux"
+    ? convertToNative("droppoint.ico")
+    : convertToNative("pngLogo/droppoint-1.png");
 let droppointMacIcon = convertToNative("droppoint.icns");
 let audio = convertToNative("audio.png");
 let file = convertToNative("file.png");
