@@ -6,7 +6,9 @@ const convertToNative = (imageName) =>
 const icons = {
   droppointDefaultIcon:
     process.platform !== "win32"
-      ? convertToNative("pngLogo/droppoint.png")
+      ? process.platform === "darwin"
+        ? convertToNative("pngLogo/droppointMacTemplate.png")
+        : convertToNative("pngLogo/droppoint.png")
       : convertToNative("droppoint.ico"),
   audio: convertToNative("audio.png"),
   file: convertToNative("file.png"),
