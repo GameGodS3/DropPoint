@@ -6,10 +6,11 @@ const { setShortcut } = require("./Shortcut");
 const { droppointDefaultIcon } = require("./Icons");
 const { setTray } = require("./Tray");
 
+let splashScreen;
 app
   .on("ready", () => {
     // Splash screen to run in background and keep app alive
-    let splashScreen = new BrowserWindow({
+    splashScreen = new BrowserWindow({
       width: 400,
       height: 200,
       frame: false,
@@ -34,6 +35,10 @@ app
     if (BrowserWindow.getAllWindows.length === 0) {
       createMainWindow();
     }
+  })
+  .on("before-quit", () => {
+    DROPPOINT_MAIN.close();
+    splashScreen.close();
   })
   .on("will-quit", () => {
     globalShortcut.unregisterAll();

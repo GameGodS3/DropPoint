@@ -9,7 +9,7 @@ const icons = {
       ? process.platform === "darwin"
         ? convertToNative("droppoint.icns")
         : convertToNative("droppoint.ico")
-      : convertToNative("pngLogo/droppoint-1.png"),
+      : convertToNative("pngLogo/droppoint.png"),
   droppointMacIcon: convertToNative("droppoint.icns"),
   audio: convertToNative("audio.png"),
   file: convertToNative("file.png"),
