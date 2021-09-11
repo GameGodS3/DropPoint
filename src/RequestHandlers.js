@@ -47,7 +47,6 @@ let getFilePathList = (fileList) => {
 let dragHandler = ipcMain.on("ondragstart", (event, fileList) => {
   let fileType = getFileTypeIcons(fileList);
   let filePathList = getFilePathList(fileList);
-  let flag = false;
   event.sender.startDrag({
     files: filePathList,
     icon: nativeImage.createFromPath(fileType).resize({ width: 64 }),

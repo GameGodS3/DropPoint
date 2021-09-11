@@ -15,6 +15,7 @@ app
       height: 200,
       frame: false,
       titleBarStyle: "hidden",
+      fullscreenable: false,
       transparent: true,
       icon: nativeImage.createFromPath(droppointDefaultIcon),
     });

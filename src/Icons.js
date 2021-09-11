@@ -1,22 +1,28 @@
 const path = require("path");
 
-const convertToNative = (imageName) =>
+/**
+ * Adds static folder path to image name
+ *
+ * @param {String} imageName
+ * @returns {String}
+ */
+const joinStaticPath = (imageName) =>
   path.join(__dirname, "../static/media/", imageName);
 
 const icons = {
   droppointDefaultIcon:
     process.platform !== "win32"
       ? process.platform === "darwin"
-        ? convertToNative("pngLogo/droppointMacTemplate.png")
-        : convertToNative("pngLogo/droppoint.png")
-      : convertToNative("droppoint.ico"),
-  audio: convertToNative("audio.png"),
-  file: convertToNative("file.png"),
-  folder: convertToNative("folder.png"),
-  image: convertToNative("image.png"),
-  multifile: convertToNative("multifile.png"),
-  text: convertToNative("text.png"),
-  video: convertToNative("video.png"),
+        ? joinStaticPath("pngLogo/droppointMacTemplate.png")
+        : joinStaticPath("pngLogo/droppoint.png")
+      : joinStaticPath("droppoint.ico"),
+  audio: joinStaticPath("audio.png"),
+  file: joinStaticPath("file.png"),
+  folder: joinStaticPath("folder.png"),
+  image: joinStaticPath("image.png"),
+  multifile: joinStaticPath("multifile.png"),
+  text: joinStaticPath("text.png"),
+  video: joinStaticPath("video.png"),
 };
 
 module.exports = icons;

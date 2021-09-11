@@ -16,6 +16,7 @@ let defaultWindowConfig = {
   transparent: true,
   resizable: false,
   alwaysOnTop: true,
+  fullscreenable: false,
   webPreferences: {
     nodeIntegration: true,
     preload: path.join(__dirname, "preload.js"),
@@ -30,6 +31,7 @@ function devConfig() {
   defaultWindowConfig.resizable = true;
   defaultWindowConfig.width = null;
   defaultWindowConfig.height = null;
+  defaultWindowConfig.fullscreenable = true;
 }
 
 /**

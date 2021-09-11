@@ -24,9 +24,7 @@ const setTray = () => {
             tray.displayBalloon({
               title: "DropPoint",
               content: "Instance already exists!",
-              icon: nativeImage
-                .createFromPath(droppointDefaultIcon)
-                .resize({ width: 64 }),
+              icon: nativeImage.createFromPath(droppointDefaultIcon),
             });
           }
         },
