@@ -9,7 +9,7 @@ const { setTray } = require("./Tray");
 let splashScreen;
 app
   .on("ready", () => {
-    // Splash screen to run in background and keep app alive
+    // Splash screen which also helps to run in background and keep app alive
     splashScreen = new BrowserWindow({
       width: 400,
       height: 200,

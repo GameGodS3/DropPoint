@@ -32,7 +32,7 @@ const setTray = () => {
       {
         label: "Quit",
         click: function () {
-          app.quit();
+          app.exit();
         },
       },
     ])

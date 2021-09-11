@@ -1,4 +1,5 @@
 const path = require("path");
+const { nativeTheme } = require("electron");
 
 /**
  * Adds static folder path to image name
@@ -13,7 +14,9 @@ const icons = {
   droppointDefaultIcon:
     process.platform !== "win32"
       ? process.platform === "darwin"
-        ? joinStaticPath("pngLogo/droppointMacTemplate.png")
+        ? nativeTheme.shouldUseDarkColors
+          ? joinStaticPath("pngLogo/droppointMacDarkTemplate.png")
+          : joinStaticPath("pngLogo/droppointMacTemplate.png")
         : joinStaticPath("pngLogo/droppoint.png")
       : joinStaticPath("droppoint.ico"),
   audio: joinStaticPath("audio.png"),
