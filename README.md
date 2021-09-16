@@ -29,7 +29,7 @@ Follows Fluent design style to match Windows 11 aesthetics :)
 
 ![Drag between desktops](https://i.imgur.com/WElktc0.gif)
 
-## :package: Official Releases
+## :package: How to Install (Normal Installation)
 
 Go to the [Releases Page](https://github.com/GameGodS3/DropPoint/releases) to download the latest releases
 
