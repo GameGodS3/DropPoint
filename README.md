@@ -34,13 +34,13 @@ Follows Fluent design style to match Windows 11 aesthetics :)
 Go to the [Releases Page](https://github.com/GameGodS3/DropPoint/releases) to download the latest releases
 
 - Windows
-  - Download `DropPoint-1.x.x-win.zip` from Releases and extract to a blank folder. Run `DropPoint.exe`.
+  - Download [`DropPoint-1.x.x-win.zip`](https://github.com/GameGodS3/DropPoint/releases/download/v1.1.3/droppoint-1.1.3.tar.gz) from Releases and extract to a blank folder. Run `DropPoint.exe`.
   - To enable stickyness across Virtual Desktops (Windows) go to Task view while DropPoint is running, right click it and tick **"Show Window from this app on all Desktops"**. Stickyness in other Operating Systems works by default.
 - Mac
-  - Download `DropPoint-1.x.x.dmg` from Releases and install. Open "System Preferences > Security & Privacy > Open Anyway"
+  - Download [`DropPoint-1.x.x.dmg`](https://github.com/GameGodS3/DropPoint/releases/download/v1.1.3/DropPoint-1.1.3-intel.dmg) from Releases and install. Open "System Preferences > Security & Privacy > Open Anyway"
   - Or Download `DropPoint-1.x.x-mac.zip` from Releases and extract to a blank folder. Run `DropPoint.app`. Open "System Preferences > Security & Privacy > Open Anyway"
 - Linux
-  - All Linux Distros: Download `DropPoint-1.x.x.AppImage` to run.
+  - All Linux Distros: Download [`DropPoint-1.x.x.AppImage`](https://github.com/GameGodS3/DropPoint/releases/download/v1.1.3/DropPoint-1.1.3.AppImage) to run.
   - Debian-based Distros (Ubuntu, Mint, PopOs, etc): Download `droppoint_1.x.x_amd64.deb`.
   - Arch-based Distros (Manjaro, Arch, etc.): Download `droppoint-1.x.x.tar.gz`
   - RHEL-based Distros (Fedora, Red Hat, etc): Download `droppoint-1.x.x.x86_64.rpm`.
