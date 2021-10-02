@@ -66,8 +66,10 @@ Go to the [Releases Page](https://github.com/GameGodS3/DropPoint/releases) to do
     npm install
     npm start
    ```
+## :star: Contribution
+Contributions are welcome 😃. 
 
-**_Contributions are welcome!_**
+Please do refer to our [Contributing Guidelines](https://github.com/GameGodS3/DropPoint/blob/main/docs/CONTRIBUTING.md) and [Pull Request Templates](https://github.com/GameGodS3/DropPoint/blob/main/docs/PULL_REQUEST_TEMPLATE.md) before making a Pull Request.
 
 ## :heart: Credits
 
