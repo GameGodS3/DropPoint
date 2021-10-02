@@ -43,8 +43,10 @@ function devConfig() {
  * @returns {Boolean} true if successful
  */
 function createMainWindow(debug = false) {
-  let width = screen.getPrimaryDisplay().bounds.width;
-  defaultWindowConfig.x = width / 2 - 100;
+
+  let point = screen.getCursorScreenPoint()
+  defaultWindowConfig.x = point.x;
+  defaultWindowConfig.y = point.y - defaultWindowConfig.height;
 
   if (debug) {
     devConfig();
