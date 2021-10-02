@@ -6,13 +6,22 @@ const { createMainWindow } = require("./Window");
  */
 const setShortcut = () => {
   let visible = true;
-  const ret = globalShortcut.register("Shift+Capslock", () => {
+
+  let shortcut = "Shift+Capslock";
+
+  if (process.platform === "darwin") {
+    shortcut = "Shift+Tab"
+  }
+
+  const ret = globalShortcut.register(shortcut, () => {
     if (DROPPOINT_MAIN) {
       DROPPOINT_MAIN.close();
     } else {
       createMainWindow();
     }
   });
+
+
 
   if (!ret) {
     console.log("KeyboardShorcutError");
