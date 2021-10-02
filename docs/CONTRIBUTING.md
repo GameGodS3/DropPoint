@@ -13,6 +13,8 @@ Please note we have a code of conduct, please follow it in all your interactions
    variables, exposed ports, useful file locations and container parameters.
 3. Increase the version numbers in any examples files and the README.md to the new version that this
    Pull Request would represent. The versioning scheme we use is [SemVer](http://semver.org/).
+4. Create Pull Requests according to the provided [Pull Request Templates](https://github.com/GameGodS3/DropPoint/blob/main/docs/PULL_REQUEST_TEMPLATE.md) only.
+   PRs otherwise might not be considered valid for merging.
 
 ## Code of Conduct
 
