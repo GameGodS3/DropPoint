@@ -6,6 +6,7 @@
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/GameGodS3/DropPoint/Build?style=flat-square)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/GameGodS3/DropPoint?style=flat-square)
 ![GitHub repo size](https://img.shields.io/github/repo-size/GameGodS3/DropPoint?color=yellow&style=flat-square)
+![GitHub all releases](https://img.shields.io/github/downloads/GameGodS3/DropPoint/total?style=flat-square)
 
 [![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint)](https://twitter.com/intent/tweet?text=Checkout%20this%20cool%20project!&url=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint)
 
