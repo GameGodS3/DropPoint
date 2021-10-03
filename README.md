@@ -1,17 +1,21 @@
 # DropPoint - Make Drag 'n' Drop easier [![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint)](https://twitter.com/intent/tweet?text=Checkout%20this%20cool%20project!&url=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint)
-<p align="center">
 
 ![DropPoint](https://socialify.git.ci/GameGodS3/DropPoint/image?description=1&logo=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint%2Fblob%2Fmain%2Fstatic%2Fmedia%2Fdroppoint.ico%3Fraw%3Dtrue&owner=1&theme=Light)
 
-[![GitHub license](https://img.shields.io/github/license/GameGodS3/DropPoint?style=flat-square)](https://github.com/GameGodS3/DropPoint/blob/main/LICENSE)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/GameGodS3/DropPoint/Build?style=flat-square)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/GameGodS3/DropPoint?style=flat-square)
-![GitHub repo size](https://img.shields.io/github/repo-size/GameGodS3/DropPoint?color=yellow&style=flat-square)
-![GitHub all releases](https://img.shields.io/github/downloads/GameGodS3/DropPoint/total?style=flat-square)
-
-
-
+<p align="center">
+  <a href="https://www.buymeacoffee.com/sudev">
+    <img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png">
+  </a>
 </p>
+
+<p align="center">
+  <img src= "https://img.shields.io/github/downloads/GameGodS3/DropPoint/total?style=flat-square">
+  <img src= "https://img.shields.io/github/v/release/GameGodS3/DropPoint?style=flat-square">
+  <img src= "https://img.shields.io/github/license/GameGodS3/DropPoint?style=flat-square">
+  <img src= "https://img.shields.io/github/workflow/status/GameGodS3/DropPoint/Build?style=flat-square">
+  <img src= "https://img.shields.io/github/repo-size/GameGodS3/DropPoint?color=yellow&style=flat-square">
+</p>
+
 
 Make drag-and-drop easier using DropPoint!
 
