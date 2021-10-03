@@ -1,3 +1,4 @@
+# DropPoint - Make Drag 'n' Drop easier [![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint)](https://twitter.com/intent/tweet?text=Checkout%20this%20cool%20project!&url=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint)
 <p align="center">
 
 ![DropPoint](https://socialify.git.ci/GameGodS3/DropPoint/image?description=1&logo=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint%2Fblob%2Fmain%2Fstatic%2Fmedia%2Fdroppoint.ico%3Fraw%3Dtrue&owner=1&theme=Light)
@@ -8,7 +9,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/GameGodS3/DropPoint?color=yellow&style=flat-square)
 ![GitHub all releases](https://img.shields.io/github/downloads/GameGodS3/DropPoint/total?style=flat-square)
 
-[![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint)](https://twitter.com/intent/tweet?text=Checkout%20this%20cool%20project!&url=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint)
+
 
 </p>
 
@@ -38,8 +39,7 @@ Go to the [Releases Page](https://github.com/GameGodS3/DropPoint/releases) to do
   - Download `DropPoint-1.x.x-win.zip` from Releases and extract to a blank folder. Run `DropPoint.exe`.
   - To enable stickyness across Virtual Desktops (Windows) go to Task view while DropPoint is running, right click it and tick **"Show Window from this app on all Desktops"**. Stickyness in other Operating Systems works by default.
 - Mac
-  - Download `DropPoint-1.x.x.dmg` from Releases and install. Open "System Preferences > Security & Privacy > Open Anyway"
-  - Or Download `DropPoint-1.x.x-mac.zip` from Releases and extract to a blank folder. Run `DropPoint.app`. Open "System Preferences > Security & Privacy > Open Anyway"
+  - Download `DropPoint-1.x.x-intel.dmg` or `DropPoint-1.x.x-arm64-Apple-Silicon.dmg`(for Apple M1 Devices only) from Releases and install. Open "System Preferences > Security & Privacy > Open Anyway"
 - Linux
   - All Linux Distros: Download `DropPoint-1.x.x.AppImage` to run.
   - Debian-based Distros (Ubuntu, Mint, PopOs, etc): Download `droppoint_1.x.x_amd64.deb`.
