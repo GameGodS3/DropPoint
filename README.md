@@ -39,8 +39,8 @@ Go to the [Releases Page](https://github.com/GameGodS3/DropPoint/releases) to do
   - Download `DropPoint-1.x.x-win.zip` from Releases and extract to a blank folder. Run `DropPoint.exe`.
   - To enable stickyness across Virtual Desktops (Windows) go to Task view while DropPoint is running, right click it and tick **"Show Window from this app on all Desktops"**. Stickyness in other Operating Systems works by default.
 - Mac
-  - Download `DropPoint-1.x.x.dmg` from Releases and install. Open "System Preferences > Security & Privacy > Open Anyway"
-  - Or Download `DropPoint-1.x.x-mac.zip` from Releases and extract to a blank folder. Run `DropPoint.app`. Open "System Preferences > Security & Privacy > Open Anyway"
+  - Download `DropPoint-1.x.x-intel.dmg` or `DropPoint-1.x.x-arm64-Apple-Silicon.dmg`(for Apple M1 Devices only) from Releases and install. Open "System Preferences > Security & Privacy > Open Anyway"
+  - 
 - Linux
   - All Linux Distros: Download `DropPoint-1.x.x.AppImage` to run.
   - Debian-based Distros (Ubuntu, Mint, PopOs, etc): Download `droppoint_1.x.x_amd64.deb`.
