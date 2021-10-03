@@ -9,6 +9,7 @@
   * `[Documentation]` - for documentation improvement (such as Readme, Contributing Guidelines, etc.)
   * `[Performance]` - for Performance improvements
 * After you create the pull request, all status checks must be pass before a maintainer reviews your contribution.
+* Example of a [good Pull Request](https://github.com/GameGodS3/DropPoint/pull/14)
 
 ### Context
 
