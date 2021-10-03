@@ -43,8 +43,24 @@ function devConfig() {
  * @returns {Boolean} true if successful
  */
 function createMainWindow(debug = false) {
-  let width = screen.getPrimaryDisplay().bounds.width;
-  defaultWindowConfig.x = width / 2 - 100;
+
+  let point = screen.getCursorScreenPoint()
+  let screenWidth = screen.getPrimaryDisplay().bounds.width;
+
+  // Position instance of window at Cursor position
+  defaultWindowConfig.y = point.y - defaultWindowConfig.height;
+  defaultWindowConfig.x = point.x;
+
+  console.log(defaultWindowConfig.x + defaultWindowConfig.width);
+
+  /* On Windows and Linux, cursor can go beyond screen in the top and right edges hence 
+   window needs to be repositioned to stay within screen */
+  if (defaultWindowConfig.x + defaultWindowConfig.width > screenWidth) {
+    defaultWindowConfig.x = screenWidth - defaultWindowConfig.width;
+  }
+  if (defaultWindowConfig.y < 0) {
+    defaultWindowConfig.y = 0;
+  }
 
   if (debug) {
     devConfig();
