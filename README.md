@@ -1,3 +1,4 @@
+# DropPoint - Make Drag 'n' Drop easier [![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint)](https://twitter.com/intent/tweet?text=Checkout%20this%20cool%20project!&url=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint)
 <p align="center">
 
 ![DropPoint](https://socialify.git.ci/GameGodS3/DropPoint/image?description=1&logo=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint%2Fblob%2Fmain%2Fstatic%2Fmedia%2Fdroppoint.ico%3Fraw%3Dtrue&owner=1&theme=Light)
@@ -8,7 +9,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/GameGodS3/DropPoint?color=yellow&style=flat-square)
 ![GitHub all releases](https://img.shields.io/github/downloads/GameGodS3/DropPoint/total?style=flat-square)
 
-[![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint)](https://twitter.com/intent/tweet?text=Checkout%20this%20cool%20project!&url=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint)
+
 
 </p>
 
