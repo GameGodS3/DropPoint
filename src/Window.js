@@ -72,6 +72,10 @@ function createMainWindow(debug = false) {
 
   DROPPOINT_MAIN.loadFile(path.join(__dirname, "../static/index.html"));
   DROPPOINT_MAIN.setVisibleOnAllWorkspaces(true);
+
+  // on MacOs setting frame: false is not enough to remove title bar buttons, need to setWindowButtonVisibility
+  DROPPOINT_MAIN.setWindowButtonVisibility(false);
+
   DROPPOINT_MAIN.shadow = true;
   DROPPOINT_MAIN.removeMenu();
 
