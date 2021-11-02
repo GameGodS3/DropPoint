@@ -25,6 +25,17 @@ Works on **Windows**, **Linux** and **MacOS**.
 
 Follows Fluent design style to match Windows 11 aesthetics :)
 
+## Table of Contents
+- [:sparkles: Demo](#sparkles-demo)
+  * [Across maximized windows in the same desktop](#across-maximized-windows-in-the-same-desktop)
+  * [Across windows in different virtual desktops/workspaces](#across-windows-in-different-virtual-desktopsworkspaces)
+- [:package: How to Install (Normal Installation)](#package-how-to-install-normal-installation)
+- [:v: Usage](#v-usage)
+- [:gear: Developer Installation](#gear-developer-installation)
+- [:star: Contribution](#star-contribution)
+- [:heart: Credits](#heart-credits)
+- [Related](#related)
+
 ## :sparkles: Demo
 
 ### Across maximized windows in the same desktop
