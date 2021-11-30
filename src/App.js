@@ -1,7 +1,7 @@
 const { app, BrowserWindow, nativeImage } = require("electron");
 const path = require("path");
 const { autoUpdater } = require("electron-updater");
-const { createMainWindow } = require("./Window");
+const { Instance } = require("./Window");
 const { setShortcut } = require("./Shortcut");
 const { droppointDefaultIcon } = require("./Icons");
 const { setTray } = require("./Tray");
@@ -25,7 +25,8 @@ app
       splashScreen.hide();
     }, 3000);
     if (BrowserWindow.getAllWindows.length === 0) {
-      if (createMainWindow()) {
+      let instance = new Instance();
+      if (instance.createNewWindow() != null) {
         setTray();
         setShortcut();
       }
