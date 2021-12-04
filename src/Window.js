@@ -36,6 +36,10 @@ class Instance {
     };
   }
 
+  /**
+   * Creates a new DropPoint Instance
+   * @returns {number} id - Unique ID of the instance | null if not created
+   */
   createNewWindow() {
     this.windowConfig.x = this.getCursorPos().x;
     this.windowConfig.y = this.getCursorPos().y;
@@ -54,23 +58,25 @@ class Instance {
 
     this.instance.on("closed", () => (this.instance = null));
 
+    console.log(`Instance ID: ${this.id}\n`);
+
     return this.id ? this.instance : null;
   }
 
+  /**
+   * Gets position at which DropPoint Instance must open
+   * @returns {Object} - {x: number, y: number} Coordinates of the mouse position
+   */
   getCursorPos() {
     let point = screen.getCursorScreenPoint();
     let screenWidth = screen.getPrimaryDisplay().bounds.width;
 
     // Position instance of window at Cursor position
-    console.log(point);
-    console.log(point.x);
-    console.log(point.y);
-    const xPoint = point.x;
-    const yPoint = point.y - this.windowConfig.height;
+    console.log(`Cursor position: ${point.x}, ${point.y}`);
+    let xPoint = point.x;
+    let yPoint = point.y - this.windowConfig.height;
 
-    console.log(xPoint + this.windowConfig.width);
-
-    /* On Windows and Linux, cursor can go beyond screen in the top and right edges hence
+    /* On Windows and Linux, app windows can go beyond screen in the top and right edges hence
    window needs to be repositioned to stay within screen */
     if (xPoint + this.windowConfig.width > screenWidth) {
       xPoint = screenWidth - this.windowConfig.width;
