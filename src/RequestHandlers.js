@@ -11,8 +11,8 @@ const icons = require("./Icons");
 let getFileTypeIcons = (fileList) => {
   let fileType;
   if (fileList.length <= 1) {
-    fileType = fileList[0]["fileType"];
-    if (fileType != "application") {
+    fileType = fileList[0].fileType;
+    if (fileType !== "application") {
       fileType = icons[fileType];
     } else {
       fileType = icons.file;
@@ -33,7 +33,7 @@ let getFileTypeIcons = (fileList) => {
 let getFilePathList = (fileList) => {
   let filePathList = [];
   fileList.forEach((element) => {
-    filePathList.push(element["filePath"]);
+    filePathList.push(element.filePath);
   });
   return filePathList;
 };

@@ -62,9 +62,9 @@ function clearDrag() {
       if (filetype === "") {
         document.querySelector("#drag img").src = "./media/file.png";
         filetype = "application";
-      } else if (filetype != "application") {
+      } else if (filetype !== "application") {
         document.querySelector("#drag img").src =
-          "./media/" + filetype + ".png";
+          `./media/${filetype}.png`;
       } else {
         document.querySelector("#drag img").src = "./media/file.png";
       }
@@ -82,7 +82,7 @@ function clearDrag() {
 
     // Animations for multiple file input
     dragicons = document.getElementsByClassName("files");
-    if (filelist.length == 2) {
+    if (filelist.length === 2) {
       dragicons[0].src = "./media/file.png";
       let newimg = document.createElement("img");
       newimg.src = "./media/file.png";

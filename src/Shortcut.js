@@ -1,12 +1,10 @@
-const { globalShortcut, BrowserWindow } = require("electron");
+const { globalShortcut } = require("electron");
 const { Instance } = require("./Window");
 
 /**
  * Sets Shift + Caps Lock as Shortcut. Change to convenience
  */
 const setShortcut = () => {
-  let visible = true;
-
   let shortcut = "Shift+Capslock";
 
   if (process.platform === "darwin") {

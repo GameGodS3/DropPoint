@@ -26,7 +26,7 @@ app
     }, 3000);
     if (BrowserWindow.getAllWindows.length === 0) {
       let instance = new Instance();
-      if (instance.createNewWindow() != null) {
+      if (instance.createNewWindow() !== null) {
         setTray();
         setShortcut();
       }
