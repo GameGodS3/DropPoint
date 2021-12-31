@@ -1,5 +1,7 @@
-const { app, BrowserWindow, nativeImage } = require("electron");
 const path = require("path");
+const fs = require("fs");
+
+const { app, BrowserWindow, nativeImage } = require("electron");
 const { autoUpdater } = require("electron-updater");
 const { Instance } = require("./Window");
 const { setShortcut } = require("./Shortcut");
@@ -25,24 +27,41 @@ app
       splashScreen.hide();
     }, 3000);
     if (BrowserWindow.getAllWindows.length === 0) {
-      let instance = new Instance();
-      if (instance.createNewWindow() !== null) {
+      const instance = new Instance();
+      const instanceID = instance.createNewWindow();
+      if (instanceID !== null) {
         setTray();
         setShortcut();
       }
+      console.log(instance.getInstance(instanceID));
     }
+
+    fs.readFile("fileHistory.json", (err, data) => {
+      if (err) throw err;
+      else {
+        let instanceList = [];
+        let history = JSON.parse(data);
+
+        history.history.forEach((element) => {
+          instanceList.push(element.instanceID);
+        });
+        console.log(instanceList);
+      }
+    });
   })
-  .on("activate", () => {
-    autoUpdater.checkForUpdatesAndNotify();
-    if (BrowserWindow.getAllWindows.length === 0) {
-      createMainWindow();
-    }
-  })
+  // .on("activate", () => {
+  //   autoUpdater.checkForUpdatesAndNotify();
+  //   if (BrowserWindow.getAllWindows.length === 0) {
+  //     createMainWindow();
+  //   }
+  // })
   .on("before-quit", () => {
-    DROPPOINT_MAIN.close();
+    // DROPPOINT_MAIN.close();
     splashScreen.close();
   })
   .on("will-quit", () => {
     globalShortcut.unregisterAll();
   });
-module.exports = { whenReady: app.whenReady };
+module.exports = {
+  whenReady: app.whenReady,
+};

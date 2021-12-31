@@ -1,7 +1,9 @@
-const { BrowserWindow, screen, nativeImage } = require("electron");
 const path = require("path");
 
+const { BrowserWindow, screen, nativeImage } = require("electron");
+
 const { droppointDefaultIcon } = require("./Icons");
+const { initHistory } = require("./History");
 require("./RequestHandlers");
 
 /**
@@ -58,9 +60,12 @@ class Instance {
 
     this.instance.on("closed", () => (this.instance = null));
 
-    console.log(`Instance ID: ${this.id}\n`);
+    console.log(`Instance ID: ${this.id}`);
 
-    return this.id ? this.instance : null;
+    // Create a history for instance
+    initHistory(this.id);
+
+    return this.instance ? this.id : null;
   }
 
   /**
@@ -85,6 +90,14 @@ class Instance {
       yPoint = 0;
     }
     return { x: xPoint, y: yPoint };
+  }
+
+  getInstance(id) {
+    if (id === this.id) {
+      return this.instance;
+    } else {
+      return null;
+    }
   }
 }
 
