@@ -1,6 +1,6 @@
 const { Tray, Menu, nativeImage, app } = require("electron");
 const { droppointDefaultIcon } = require("./Icons");
-const { createMainWindow } = require("./Window");
+const { createMainWindow, Instance } = require("./Window");
 
 let trayIcon = nativeImage
   .createFromPath(droppointDefaultIcon)
@@ -18,15 +18,18 @@ const setTray = () => {
       {
         label: "New Instance",
         click: function () {
-          if (!DROPPOINT_MAIN) {
-            createMainWindow();
-          } else {
-            tray.displayBalloon({
-              title: "DropPoint",
-              content: "Instance already exists!",
-              icon: nativeImage.createFromPath(droppointDefaultIcon),
-            });
-          }
+          // if (!DROPPOINT_MAIN) {
+          //   createMainWindow();
+          // } else {
+          //   tray.displayBalloon({
+          //     title: "DropPoint",
+          //     content: "Instance already exists!",
+          //     icon: nativeImage.createFromPath(droppointDefaultIcon),
+          //   });
+          // }
+          const instance = new Instance();
+          const instanceID = instance.createNewWindow();
+          console.log("Tray.js: " + instanceID);
         },
       },
       {
