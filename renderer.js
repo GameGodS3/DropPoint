@@ -6,6 +6,11 @@ let dragin = document.getElementsByClassName("upload")[0];
 let dragout = document.getElementById("drag");
 let fileicons = document.querySelector(".file-icon");
 let dragicons = document.getElementsByClassName("files");
+let instanceId = window.process.argv;
+
+document.onload = () => {
+  console.log(instanceId);
+};
 
 function clearDrag() {
   filelist = [];
@@ -63,8 +68,7 @@ function clearDrag() {
         document.querySelector("#drag img").src = "./media/file.png";
         filetype = "application";
       } else if (filetype !== "application") {
-        document.querySelector("#drag img").src =
-          `./media/${filetype}.png`;
+        document.querySelector("#drag img").src = `./media/${filetype}.png`;
       } else {
         document.querySelector("#drag img").src = "./media/file.png";
       }

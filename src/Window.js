@@ -31,7 +31,9 @@ class Instance {
       alwaysOnTop: true,
       webPreferences: {
         nodeIntegration: true,
+        contextIsolation: false,
         preload: path.join(__dirname, "preload.js"),
+        additionalArguments: [this.id],
       },
 
       icon: nativeImage.createFromPath(droppointDefaultIcon),
@@ -63,7 +65,8 @@ class Instance {
     console.log(`Instance ID: ${this.id}`);
 
     // Create a history for instance
-    initHistory(this.id);
+    // initHistory(this.id);
+    initHistory(this);
 
     return this.instance ? this.id : null;
   }
@@ -98,6 +101,14 @@ class Instance {
     } else {
       return null;
     }
+  }
+
+  closeInstance(id) {
+    if (id === this.id) {
+      this.instance.close();
+      return true;
+    }
+    return false;
   }
 }
 

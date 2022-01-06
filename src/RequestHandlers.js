@@ -45,11 +45,11 @@ let getFilePathList = (fileList) => {
  * @param {Array} fileList - List of files
  */
 let dragHandler = ipcMain.on("ondragstart", (event, fileList) => {
-  let fileType = getFileTypeIcons(fileList);
+  let fileTypeIcons = getFileTypeIcons(fileList);
   let filePathList = getFilePathList(fileList);
   event.sender.startDrag({
     files: filePathList,
-    icon: nativeImage.createFromPath(fileType).resize({ width: 64 }),
+    icon: nativeImage.createFromPath(fileTypeIcons).resize({ width: 64 }),
   });
   DROPPOINT_MAIN.close();
 });

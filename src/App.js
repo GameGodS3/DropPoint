@@ -26,6 +26,7 @@ app
     setTimeout(() => {
       splashScreen.hide();
     }, 3000);
+
     if (BrowserWindow.getAllWindows.length === 0) {
       const instance = new Instance();
       const instanceID = instance.createNewWindow();
