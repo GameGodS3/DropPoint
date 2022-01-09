@@ -44,8 +44,9 @@ app
         let history = JSON.parse(data);
 
         history.history.forEach((element) => {
-          instanceList.push(element.instanceID);
+          instanceList.push(element.instanceObj);
         });
+
         console.log(instanceList);
       }
     });

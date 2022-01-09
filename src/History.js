@@ -36,12 +36,19 @@ const initHistory = (instance) => {
     });
 };
 
-const getLatestInstance = () => {
-  getHistory().then((history) => {
-    const latestInstance = history.history.slice(-1).instanceObj;
-    console.log("History.js LatestInstace: " + latestInstance);
+const getLatestInstance = async () => {
+  // getHistory().then((history) => {
+  //   const latestInstance = history.history.slice(-1);
+  //   console.log("History.js LatestInstace: " + latestInstance);
+  //   return latestInstance;
+  // });
+  try {
+    const history = await getHistory();
+    const latestInstance = history.history.slice(-1);
     return latestInstance;
-  });
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 module.exports = {
