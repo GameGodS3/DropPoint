@@ -6,18 +6,19 @@ const { droppointDefaultIcon } = require("./Icons");
 const { initHistory } = require("./History");
 require("./RequestHandlers");
 
-/**
- * DropPoint Instance class.
- * Multiple instances of DropPoint can be maintained with this.
- * Each instance can be uniquely identified by id object
- *
- * @param {Boolean} devFlag - to open dev mode | false
- *
- */
 class Instance {
+  /**
+   * DropPoint Instance class.
+   * Multiple instances of DropPoint can be maintained with this.
+   * Each instance can be uniquely identified by id object
+   *
+   * @param {Boolean} devFlag - to open dev mode | false
+   *
+   */
   constructor(devFlag = false) {
     this.instance = null;
     this.id = +new Date();
+    this.devFlag = devFlag;
     this.windowConfig = {
       width: devFlag ? null : 200,
       height: devFlag ? null : 200,
@@ -31,9 +32,7 @@ class Instance {
       alwaysOnTop: true,
       webPreferences: {
         nodeIntegration: true,
-        contextIsolation: false,
         preload: path.join(__dirname, "preload.js"),
-        additionalArguments: [this.id],
       },
 
       icon: nativeImage.createFromPath(droppointDefaultIcon),
@@ -50,9 +49,15 @@ class Instance {
 
     this.instance = new BrowserWindow(this.windowConfig);
 
-    this.instance.loadFile(path.join(__dirname, "../static/index.html"));
+    this.instance.loadFile(path.join(__dirname, "../static/index.html"), {
+      query: { id: this.id },
+    });
 
     this.instance.setVisibleOnAllWorkspaces(true);
+
+    if (this.devFlag) {
+      this.instance.webContents.openDevTools();
+    }
 
     if (process.platform === "darwin")
       this.instance.setWindowButtonVisibility(false);

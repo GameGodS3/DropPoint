@@ -1,16 +1,14 @@
 let filepath;
 let filetype;
 let filelist = [];
-let holder = document.getElementById("droppoint");
-let dragin = document.getElementsByClassName("upload")[0];
-let dragout = document.getElementById("drag");
-let fileicons = document.querySelector(".file-icon");
-let dragicons = document.getElementsByClassName("files");
-let instanceId = window.process.argv;
+const holder = document.getElementById("droppoint");
+const dragin = document.getElementsByClassName("upload")[0];
+const dragout = document.getElementById("drag");
+const fileicons = document.querySelector(".file-icon");
+const dragicons = document.getElementsByClassName("files");
+const instanceId = parseInt(globalThis.location.search.substring(4));
 
-document.onload = () => {
-  console.log(instanceId);
-};
+console.log("Instance ID: " + instanceId);
 
 function clearDrag() {
   filelist = [];
