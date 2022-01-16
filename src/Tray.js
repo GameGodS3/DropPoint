@@ -31,31 +31,54 @@ const setTray = () => {
     {
       type: "separator",
     },
+    {
+      label: "History",
+      enabled: false,
+    },
   ];
 
   const setTrayHistory = async () => {
     const history = await getHistory();
     history.history.slice(-5).forEach((instance, index) => {
-      const d = new Date(instance.instanceId);
-      trayMenu.push({
-        label: `${
-          d.getDate() +
-          "/" +
-          (d.getMonth() + 1) +
-          "/" +
-          d.getFullYear() +
-          " " +
-          d.getHours().toLocaleString("en", {
-            minimumIntegerDigits: 2,
-            useGrouping: false,
-          }) +
-          ":" +
-          d.getMinutes().toLocaleString("en", {
-            minimumIntegerDigits: 2,
-            useGrouping: false,
-          })
-        }`,
-      });
+      if (instance.files.length !== 0) {
+        const d = new Date(instance.instanceId);
+        trayMenu.push({
+          label: `${
+            d.getDate() +
+            "/" +
+            (d.getMonth() + 1) +
+            "/" +
+            d.getFullYear() +
+            " " +
+            d.getHours().toLocaleString("en", {
+              minimumIntegerDigits: 2,
+              useGrouping: false,
+            }) +
+            ":" +
+            d.getMinutes().toLocaleString("en", {
+              minimumIntegerDigits: 2,
+              useGrouping: false,
+            })
+          }`,
+          submenu: [
+            {
+              label: "Files",
+              enabled: false,
+            },
+            {
+              label:
+                instance.files.length < 2
+                  ? `${instance.files[0].filePath.toString().split("/").pop()}`
+                  : `${instance.files[0].filePath
+                      .toString()
+                      .split("/")
+                      .pop()} and others`,
+
+              enabled: false,
+            },
+          ],
+        });
+      }
     });
     tray.setContextMenu(Menu.buildFromTemplate(trayMenu));
   };
