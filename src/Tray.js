@@ -29,7 +29,6 @@ const setTray = () => {
           // }
           const instance = new Instance();
           const instanceID = instance.createNewWindow();
-          console.log("Tray.js: " + instanceID);
         },
       },
       {

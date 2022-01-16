@@ -5,12 +5,16 @@ contextBridge.exposeInMainWorld("electron", {
   getLatestInstanceId: () => {
     ipcRenderer.send("getLatestInstanceId");
   },
-  dragOutListener: (filelist) => {
-    ipcRenderer.send("ondragstart", filelist);
+  dragOutListener: (params) => {
+    ipcRenderer.send("ondragstart", params);
   },
   minimise: () => {
     ipcRenderer.send("minimise");
   },
+});
+
+ipcRenderer.on("close-signal", (event) => {
+  window.close();
 });
 
 console.log("preload");

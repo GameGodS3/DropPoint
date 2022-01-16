@@ -44,8 +44,9 @@ class Instance {
    * @returns {number} id - Unique ID of the instance | null if not created
    */
   createNewWindow() {
-    this.windowConfig.x = this.getCursorPos().x;
-    this.windowConfig.y = this.getCursorPos().y;
+    const cursorPosition = this.getCursorPos();
+    this.windowConfig.x = cursorPosition.x;
+    this.windowConfig.y = cursorPosition.y;
 
     this.instance = new BrowserWindow(this.windowConfig);
 
@@ -55,9 +56,7 @@ class Instance {
 
     this.instance.setVisibleOnAllWorkspaces(true);
 
-    if (this.devFlag) {
-      this.instance.webContents.openDevTools();
-    }
+    if (this.devFlag) this.instance.webContents.openDevTools();
 
     if (process.platform === "darwin")
       this.instance.setWindowButtonVisibility(false);
@@ -71,7 +70,7 @@ class Instance {
 
     // Create a history for instance
     // initHistory(this.id);
-    initHistory(this);
+    initHistory(this.id);
 
     return this.instance ? this.id : null;
   }

@@ -1,6 +1,7 @@
 const { ipcMain, nativeImage } = require("electron");
 global.share = { ipcMain };
 
+const { addToInstanceHistory } = require("./History");
 const icons = require("./Icons");
 
 /**
@@ -44,14 +45,15 @@ let getFilePathList = (fileList) => {
  *
  * @param {Array} fileList - List of files
  */
-let dragHandler = ipcMain.on("ondragstart", (event, fileList) => {
-  let fileTypeIcons = getFileTypeIcons(fileList);
-  let filePathList = getFilePathList(fileList);
+let dragHandler = ipcMain.on("ondragstart", (event, params) => {
+  let fileTypeIcons = getFileTypeIcons(params.filelist);
+  let filePathList = getFilePathList(params.filelist);
   event.sender.startDrag({
     files: filePathList,
     icon: nativeImage.createFromPath(fileTypeIcons).resize({ width: 64 }),
   });
-  DROPPOINT_MAIN.close();
+  addToInstanceHistory(params.instanceId, params.filelist);
+  event.sender.send("close-signal");
 });
 
 /**

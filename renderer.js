@@ -115,7 +115,11 @@ function clearDrag() {
 // Drag out request to electron
 document.getElementById("drag").ondragstart = (event) => {
   event.preventDefault();
-  window.electron.dragOutListener(filelist);
+  const params = {
+    filelist: filelist,
+    instanceId: instanceId,
+  };
+  window.electron.dragOutListener(params);
   dragin.style.display = "flex";
   dragout.style.display = "none";
   clearDrag();

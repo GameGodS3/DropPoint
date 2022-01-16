@@ -34,22 +34,7 @@ app
         setTray();
         setShortcut();
       }
-      console.log(instance.getInstance(instanceID));
     }
-
-    fs.readFile("fileHistory.json", (err, data) => {
-      if (err) throw err;
-      else {
-        let instanceList = [];
-        let history = JSON.parse(data);
-
-        history.history.forEach((element) => {
-          instanceList.push(element.instanceObj);
-        });
-
-        console.log(instanceList);
-      }
-    });
   })
   // .on("activate", () => {
   //   autoUpdater.checkForUpdatesAndNotify();
