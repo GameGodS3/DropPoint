@@ -1,6 +1,5 @@
 const { globalShortcut } = require("electron");
 const { Instance } = require("./Window");
-const { getLatestInstance } = require("./History");
 
 /**
  * Sets Shift + Caps Lock as Shortcut. Change to convenience
@@ -13,15 +12,10 @@ const setShortcut = () => {
   }
 
   const ret = globalShortcut.register(shortcut, () => {
-    // const instance = new Instance(true);
-    // if (instance.createNewWindow() !== null) {
-    //   // instance.instance.close();
-    //   console.log("New Window created");
-    // }
-    getLatestInstance().then((latestInstance) => {
-      console.log("Shortcut.js: " + latestInstance);
-      console.log(latestInstance[0]);
-    });
+    const instance = new Instance();
+    if (instance.createNewWindow() !== null) {
+      console.log("New Window created");
+    }
   });
 
   if (!ret) {
