@@ -99,20 +99,15 @@ class Instance {
     return { x: xPoint, y: yPoint };
   }
 
-  getInstance(id) {
-    if (id === this.id) {
-      return this.instance;
-    } else {
-      return null;
+  /**
+   * Create a new instance of DropPoint with given filelist
+   */
+  createHistoryInstance(fileList) {
+    const instance = new Instance();
+    const instanceID = instance.createNewWindow();
+    if (instanceID !== null) {
+      this.instance.webContents.send("history-instance", fileList);
     }
-  }
-
-  closeInstance(id) {
-    if (id === this.id) {
-      this.instance.close();
-      return true;
-    }
-    return false;
   }
 }
 

@@ -59,8 +59,8 @@ let dragHandler = ipcMain.on("ondragstart", (event, params) => {
 /**
  * For minimising instance on clicking the button
  */
-let minimiseHandler = ipcMain.on("minimise", () => {
-  DROPPOINT_MAIN.close();
+let minimiseHandler = ipcMain.on("minimise", (event) => {
+  event.sender.send("close-signal");
 });
 
 module.exports = {

@@ -16,5 +16,6 @@ contextBridge.exposeInMainWorld("electron", {
 ipcRenderer.on("close-signal", (event) => {
   window.close();
 });
+ipcRenderer.on("history-instance", (event, filelist) => {});
 
 console.log("preload");
