@@ -52,8 +52,9 @@ holder.ondrop = (e) => {
   holder.removeAttribute("class");
   for (let f of e.dataTransfer.files) {
     console.log("Files dragged: ", f.path);
-    filetype = f.type.split("/")[0];
-    fileExtension = f.type.split("/")[1];
+    const fileProperties = f.type.split("/");
+    filetype = fileProperties[0];
+    fileExtension = fileProperties[1];
     console.log(filetype);
 
     // For checking if it's a file or folder

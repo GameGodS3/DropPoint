@@ -1,33 +1,5 @@
-// const holder = document.getElementById("droppoint");
-
-// holder.ondragover = (e) => {
-//   e.preventDefault;
-//   e.stopPropagation;
-//   holder.setAttribute("class", "dragged");
-//   return false;
-// };
-// holder.ondragenter = (e) => {
-//   e.preventDefault;
-//   e.stopPropagation;
-//   holder.setAttribute("class", "dragged");
-//   return false;
-// };
-// holder.ondragleave = (e) => {
-//   e.preventDefault;
-//   e.stopPropagation;
-//   holder.removeAttribute("class");
-//   return false;
-// };
-
-// holder.ondragend = (e) => {
-//   e.preventDefault;
-//   e.stopPropagation;
-//   holder.removeAttribute("class");
-//   return false;
-// };
-
-// File List which will contain list of dicts
-// in the format {filename:"filename", filepath:"file/path"}
+// File List which will contain list of dicts in the format
+// {filePath:"file/Path", fileType:"filetype"}
 let filelist = [];
 
 // Custom event to trigger on push.
@@ -45,19 +17,16 @@ Object.defineProperty(filelist, "push", {
   },
 });
 
-const filetypes = ["audio", "image", "video", "text", "file"];
-
 // Testing by growing the file list
-let growfilelist = () => {
-  filelist.push({
-    fileName: "TestFile",
-    fileType: filetypes[Math.floor(Math.random() * filetypes.length)],
-  });
-  console.log(filelist);
-};
-
-// UI image elements
-const imageHolder = document.querySelectorAll("#droppoint img");
+// let growfilelist = () => {
+//   for (let i = 0; i < 8; i++) {
+//     filelist.push({
+//       fileName: "TestFile",
+//       fileType: filetypes[Math.floor(Math.random() * filetypes.length)],
+//     });
+//   }
+//   console.log(filelist);
+// };
 
 // FileQueue to implement file icons animation
 class FileQueueUI {
@@ -88,21 +57,77 @@ class FileQueueUI {
     }
     return str;
   }
+  length() {
+    return this.queue.length;
+  }
 }
+
+// UI image elements
+const imageHolder = document.querySelectorAll(".file-icon img");
 
 let fq = new FileQueueUI();
-// for (let i = 0; i < imageHolder.length; i++) {
-//   const element = imageHolder[i];
-//   fq.enqueue(filetypes[Math.floor(Math.random() * filetypes.length)]);
-// }
 
 document.addEventListener("file-push", () => {
-  console.log("File Pushed");
   fq.enqueue(filelist[filelist.length - 1].fileType);
-  for (let i = 0; i < imageHolder.length; i++) {
-    imageHolder[i].src = "./static/media/" + fq.front() + ".png";
+  for (let i = 0; i < fq.length(); i++) {
+    imageHolder[i].src = "./media/" + fq.queue[fq.length() - 1 - i] + ".png";
   }
 });
-if (filelist.length == 0) {
-  imageHolder[0].src = "./static/media/upload.png";
-}
+
+// Holder area where files will be dragged and dropped
+const holder = document.getElementById("droppoint");
+
+// Adding "dragged" class to the holder when the file is dragged over it
+// "Dragged" class is used to do the border animation
+holder.ondragover = (e) => {
+  e.preventDefault;
+  e.stopPropagation;
+  holder.setAttribute("class", "dragged");
+  return false;
+};
+holder.ondragenter = (e) => {
+  e.preventDefault;
+  e.stopPropagation;
+  holder.setAttribute("class", "dragged");
+  return false;
+};
+// Removing the "dragged" class from the holder
+// when the file is dragged out of it
+holder.ondragleave = (e) => {
+  e.preventDefault;
+  e.stopPropagation;
+  holder.removeAttribute("class");
+  return false;
+};
+holder.ondragend = (e) => {
+  e.preventDefault;
+  e.stopPropagation;
+  holder.removeAttribute("class");
+  return false;
+};
+
+const uploadArea = document.querySelector(".upload");
+const dragOutArea = document.querySelector("#drag");
+holder.ondrop = (e) => {
+  e.preventDefault();
+  // Remove animation borders on file drop inside DropPoint
+  holder.removeAttribute("class");
+
+  // Get the files from the event
+  for (let f of e.dataTransfer.files) {
+    // Check if the file is already in the filelist
+    if (filelist.find((ele) => ele.fileName == f.name)) {
+      alert("File already in the list");
+      continue;
+    }
+    // Add the file to the filelist
+    filelist.push({
+      filepath: f.path.toString(),
+      fileType:
+        f.type.split("/")[0] !== "application" ? f.type.split("/")[0] : "file",
+    });
+  }
+
+  uploadArea.style.display = "none";
+  dragOutArea.style.display = "flex";
+};

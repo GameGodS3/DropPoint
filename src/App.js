@@ -28,7 +28,7 @@ app
     }, 3000);
 
     if (BrowserWindow.getAllWindows.length === 0) {
-      const instance = new Instance();
+      const instance = new Instance(true);
       const instanceID = instance.createNewWindow();
       if (instanceID !== null) {
         setTray();
