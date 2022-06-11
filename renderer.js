@@ -6,8 +6,7 @@ const dragin = document.getElementsByClassName("upload")[0];
 const dragout = document.getElementById("drag");
 const fileicons = document.querySelector(".file-icon");
 let dragicons = document.getElementsByClassName("files");
-const instanceId = parseInt(globalThis.location.search.substring(4));
-
+const instanceId = parseInt(globalThis.location.search);
 console.log("Instance ID: " + instanceId);
 
 function clearDrag() {

@@ -12,7 +12,7 @@ class Instance {
    * Multiple instances of DropPoint can be maintained with this.
    * Each instance can be uniquely identified by id object
    *
-   * @param {Boolean} devFlag - to open dev mode | false
+   * @param {Boolean} devFlag - To open dev mode. Default = False
    *
    */
   constructor(devFlag = false) {
@@ -33,6 +33,7 @@ class Instance {
       webPreferences: {
         nodeIntegration: true,
         preload: path.join(__dirname, "preload.js"),
+        additionalArguments: [this.id],
       },
 
       icon: nativeImage.createFromPath(droppointDefaultIcon),
@@ -50,9 +51,9 @@ class Instance {
 
     this.instance = new BrowserWindow(this.windowConfig);
 
-    this.instance.loadFile(path.join(__dirname, "../static/index.html"), {
-      query: { id: this.id },
-    });
+    const html_path = path.join(__dirname, "../static/index.html");
+
+    this.instance.loadURL(`file://${html_path}?id=${this.id}`);
 
     this.instance.setVisibleOnAllWorkspaces(true);
 

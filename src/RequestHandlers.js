@@ -34,7 +34,7 @@ let getFileTypeIcons = (fileList) => {
 let getFilePathList = (fileList) => {
   let filePathList = [];
   fileList.forEach((element) => {
-    filePathList.push(element.filePath);
+    filePathList.push(element.filepath);
   });
   return filePathList;
 };
@@ -46,6 +46,7 @@ let getFilePathList = (fileList) => {
  * @param {Array} fileList - List of files
  */
 let dragHandler = ipcMain.on("ondragstart", (event, params) => {
+  console.log("Params - filelist: " + JSON.stringify(params));
   let fileTypeIcons = getFileTypeIcons(params.filelist);
   let filePathList = getFilePathList(params.filelist);
   event.sender.startDrag({

@@ -1,3 +1,7 @@
+// Instance ID from Main Process
+const instanceId = parseInt(window.location.search.slice(4));
+console.log("Instance ID: " + instanceId);
+
 // File List which will contain list of dicts in the format
 // {filePath:"file/Path", fileType:"filetype"}
 let filelist = [];
@@ -131,3 +135,34 @@ holder.ondrop = (e) => {
   uploadArea.style.display = "none";
   dragOutArea.style.display = "flex";
 };
+
+const fileicons = document.querySelector(".file-icon");
+let dragicons = document.getElementsByClassName("files");
+const clearDrag = () => {
+  filelist = [];
+  if (dragicons[2]) {
+    fileicons.removeChild(dragicons[2]);
+  }
+  if (dragicons[1]) {
+    fileicons.removeChild(dragicons[1]);
+  }
+  dragicons[0].removeAttribute("style");
+};
+
+// Drag out request to electron
+document.getElementById("drag").ondragstart = (event) => {
+  event.preventDefault();
+  const params = {
+    filelist: filelist,
+    instanceId: instanceId,
+  };
+  window.electron.dragOutListener(params);
+  uploadArea.style.display = "flex";
+  dragOutArea.style.display = "none";
+  clearDrag();
+};
+
+// Close / Clear Button
+document.querySelector(".close").addEventListener("click", () => {
+  window.close();
+});

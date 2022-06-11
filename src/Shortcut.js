@@ -19,7 +19,7 @@ const setShortcut = () => {
   });
 
   if (!ret) {
-    console.log("KeyboardShorcutError");
+    console.error("KeyboardShorcutError");
   }
 };
 
