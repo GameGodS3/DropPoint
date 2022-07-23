@@ -1,4 +1,4 @@
-const { globalShortcut } = require("electron");
+const { globalShortcut, app } = require("electron");
 const { Instance } = require("./Window");
 
 /**
@@ -8,7 +8,13 @@ const setShortcut = () => {
   let shortcut = "Shift+Capslock";
 
   if (process.platform === "darwin") {
+    //caps lock is not a modifier in mac
     shortcut = "Shift+Tab";
+
+    //handle macos cmd q quitting
+    globalShortcut.register("Cmd+Q", () => {
+      app.exit();
+    })
   }
 
   const ret = globalShortcut.register(shortcut, () => {
