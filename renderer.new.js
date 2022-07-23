@@ -120,8 +120,18 @@ holder.ondrop = (e) => {
   // Get the files from the event
   for (let f of e.dataTransfer.files) {
     // Check if the file is already in the filelist
-    if (filelist.find((ele) => ele.fileName == f.name)) {
-      alert("File already in the list");
+
+    let duplicateFile = false;
+
+    for (let i = 0; i < filelist.length; i++) {
+      if (filelist[i].filepath.includes(f.name)) {
+        duplicateFile = true;
+        break;
+      }
+    }
+
+    if (duplicateFile) {
+      alert("File already in the instance");
       continue;
     }
     // Add the file to the filelist
