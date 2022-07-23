@@ -20,12 +20,13 @@ app
       fullscreenable: false,
       transparent: true,
       icon: nativeImage.createFromPath(droppointDefaultIcon),
+      show: false,
     });
-    splashScreen.loadFile(path.join(__dirname, "../static/media/splash.jpeg"));
-    splashScreen.removeMenu();
-    setTimeout(() => {
-      splashScreen.hide();
-    }, 3000);
+    // splashScreen.loadFile(path.join(__dirname, "../static/media/splash.jpeg"));
+    // splashScreen.removeMenu();
+    // setTimeout(() => {
+    //   splashScreen.hide();
+    // }, 3000);
 
     if (BrowserWindow.getAllWindows.length === 0) {
       const instance = new Instance();
