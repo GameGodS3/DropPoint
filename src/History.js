@@ -8,8 +8,15 @@ const getHistory = () => {
     fs.readFile("instanceHistory.json", (err, data) => {
       if (err) reject(err);
 
-      let history = JSON.parse(data);
-      resolve(history);
+      try {
+        let history = JSON.parse(data);
+        resolve(history);
+      } catch (e) {
+        const historyObj = {
+          history: [],
+        };
+        setHistory(historyObj).then(resolve(historyObj));
+      }
     });
   });
 };
