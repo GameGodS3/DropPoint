@@ -1,7 +1,7 @@
 const { ipcMain, nativeImage } = require("electron");
 global.share = { ipcMain };
 
-const { addToInstanceHistory } = require("./History");
+// const { addToInstanceHistory } = require("./History");
 const icons = require("./Icons");
 
 /**
@@ -53,7 +53,7 @@ let dragHandler = ipcMain.on("ondragstart", (event, params) => {
     files: filePathList,
     icon: nativeImage.createFromPath(fileTypeIcons).resize({ width: 64 }),
   });
-  addToInstanceHistory(params.instanceId, params.filelist);
+  // addToInstanceHistory(params.instanceId, params.filelist);
   event.sender.send("close-signal");
 });
 
@@ -64,7 +64,16 @@ let minimiseHandler = ipcMain.on("minimise", (event) => {
   event.sender.send("close-signal");
 });
 
+/**
+ * For printing custom debug log in development console rather than browser
+ */
+let debugPrint = ipcMain.on("debugPrint", (event, message) => {
+  console.log("[*] Debug Print: ");
+  console.log(message);
+});
+
 module.exports = {
   dragHandler: dragHandler,
   minimiseHandler: minimiseHandler,
+  debugPrint: debugPrint,
 };

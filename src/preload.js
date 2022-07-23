@@ -11,6 +11,9 @@ contextBridge.exposeInMainWorld("electron", {
   minimise: () => {
     ipcRenderer.send("minimise");
   },
+  debugPrint: (message) => {
+    ipcRenderer.send("debugPrint", message);
+  },
 });
 
 ipcRenderer.on("close-signal", (event) => {
