@@ -36,9 +36,9 @@
         </div>
         <div id="drag">
           <div class="file-icon">
-            <img alt="Upload Here" style="opacity: 0.8" class="files" />
-            <img src="" alt="" />
-            <img src="" alt="" />
+            <img src="" />
+            <img src="" />
+            <img src="" />
           </div>
           Drag Your <num></num> File(s) Out
         </div>
@@ -160,8 +160,23 @@
       justify-content: center;
       align-items: center;
     }
-    .files {
+    .file-icon img {
       position: absolute;
+      /* box-shadow: 2px 2px 20px #050a0f13; */
+      filter: drop-shadow(2px 2px 4px #050a0f2c);
+    }
+    .file-icon img:nth-child(1) {
+      z-index: 3;
+    }
+    .file-icon img:nth-child(2) {
+      z-index: 2;
+      animation: tilt 0.25s ease forwards;
+      /* transform: translate(10px) rotate(15deg); */
+    }
+    .file-icon img:nth-child(3) {
+      z-index: 1;
+      animation: tiltmore 0.25s ease forwards;
+      /* transform: translate(20px) rotate(30deg); */
     }
   </style>
   <script src="../renderer.new.js"></script>
