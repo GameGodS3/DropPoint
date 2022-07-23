@@ -1,7 +1,7 @@
 const { Tray, Menu, nativeImage, app } = require("electron");
 const { droppointDefaultIcon } = require("./Icons");
 const { Instance } = require("./Window");
-const { getHistory } = require("./History");
+// const { getHistory } = require("./History");
 
 let trayIcon = nativeImage
   .createFromPath(droppointDefaultIcon)
@@ -82,7 +82,7 @@ const setTray = () => {
     });
     tray.setContextMenu(Menu.buildFromTemplate(trayMenu));
   };
-  setTrayHistory();
+  // setTrayHistory();
 
   tray.setContextMenu(Menu.buildFromTemplate(trayMenu));
   tray.setToolTip("DropPoint");
