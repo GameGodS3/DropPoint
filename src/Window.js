@@ -3,7 +3,7 @@ const path = require("path");
 const { BrowserWindow, screen, nativeImage } = require("electron");
 
 const { droppointDefaultIcon } = require("./Icons");
-const { initHistory } = require("./History");
+// const { initHistory } = require("./History");
 require("./RequestHandlers");
 
 class Instance {
@@ -71,7 +71,6 @@ class Instance {
 
     // Create a history for instance
     // initHistory(this.id);
-    initHistory(this.id);
 
     return this.instance ? this.id : null;
   }
@@ -98,17 +97,6 @@ class Instance {
       yPoint = 0;
     }
     return { x: xPoint, y: yPoint };
-  }
-
-  /**
-   * Create a new instance of DropPoint with given filelist
-   */
-  createHistoryInstance(fileList) {
-    const instance = new Instance();
-    const instanceID = instance.createNewWindow();
-    if (instanceID !== null) {
-      this.instance.webContents.send("history-instance", fileList);
-    }
   }
 }
 
