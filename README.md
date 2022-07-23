@@ -64,9 +64,8 @@ Go to the [Releases Page](https://github.com/GameGodS3/DropPoint/releases) to do
 ## :v: Usage
 
 - Drag and drop any file(s) or folder from the system into DropPoint, go to your desired location and drag it out.
-
 - App minimises to tray by default when you close the instance. To open instance, click on system tray. To quit, right click on tray icon > Quit.
-- While DropPoint is in the system tray, pressing <kbd>Shift</kbd> + <kbd>Caps Lock</kbd> anywhere in your PC would toggle an instance of DropPoint. (as tested on Windows and Linux) (the shortcut is <kbd>Shift</kbd> + <kbd>Tab</kbd> on MacOs)
+- While DropPoint is in the system tray, pressing <kbd>Shift</kbd> + <kbd>Caps Lock</kbd> anywhere in your PC would create a new instance of DropPoint, at mouse location. (as tested on Windows and Linux) (the shortcut is <kbd>Shift</kbd> + <kbd>Tab</kbd> on MacOs)
 
 ## :gear: Developer Installation
 
