@@ -44,11 +44,11 @@ class FileQueueUI {
     this.queue.push(ele);
   }
   dequeue() {
-    if (this.isEmpty()) return "Underflow";
+    if (this.isEmpty()) return null;
     return this.queue.shift();
   }
   front() {
-    if (this.isEmpty()) return "No elements in Queue";
+    if (this.isEmpty()) return null;
     return this.queue[0];
   }
   isEmpty() {
@@ -74,8 +74,17 @@ let fq = new FileQueueUI();
 document.addEventListener("file-push", () => {
   fq.enqueue(filelist[filelist.length - 1].fileType);
   for (let i = 0; i < fq.length(); i++) {
-    imageHolder[i].src = "./media/" + fq.queue[fq.length() - 1 - i] + ".png";
+    let imageSource = "./media/" + fq.queue[fq.length() - 1 - i] + ".png";
+    imageHolder[i].src = imageSource;
   }
+
+  // Reflow animation when new files are added
+  imageHolder.forEach((e) => (e.style.animation = "none"));
+  setTimeout(() => {
+    imageHolder.forEach((e) => (e.style.animation = ""));
+  }, 100);
+
+  document.getElementsByTagName("num")[0].innerHTML = filelist.length;
 });
 
 // Holder area where files will be dragged and dropped
@@ -147,7 +156,6 @@ holder.ondrop = (e) => {
 };
 
 const fileicons = document.querySelector(".file-icon");
-let dragicons = document.getElementsByClassName("files");
 const clearDrag = () => {
   filelist = [];
   if (dragicons[2]) {
@@ -156,7 +164,6 @@ const clearDrag = () => {
   if (dragicons[1]) {
     fileicons.removeChild(dragicons[1]);
   }
-  dragicons[0].removeAttribute("style");
 };
 
 // Drag out request to electron
