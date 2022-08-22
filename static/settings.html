@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings - DropPoint</title>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    body {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      background-color: hsl(40, 100%, 97%);
+      height: 100vh;
+    }
+    h2 {
+      color: #5d6b6b;
+    }
+    hr {
+      margin: 0.5rem 0;
+    }
+    .settings {
+      margin: 1rem 0;
+    }
+
+    .input-grp {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 55px;
+      height: 27px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #942c2c;
+      transition: 0.2s;
+      -webkit-transition: 0.2s;
+      border-radius: 34px;
+    }
+    .slider::before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: 0.2s;
+      -webkit-transition: 0.2s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #208a17;
+    }
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196f3;
+    }
+    input:checked + .slider:before {
+      -webkit-transform: translateX(27px);
+      -ms-transform: translateX(27px);
+      transform: translateX(27px);
+    }
+
+    .button-grp {
+      margin-top: auto;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .button-grp input[type="button"] {
+      margin: 0 0.25rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      outline: none;
+      border: none;
+      font-size: 14px;
+      box-shadow: 2.5px 8px 16.2px rgba(0, 0, 0, 0.055),
+        100px 100px 129px rgba(0, 0, 0, 0.11);
+      border-radius: 4px;
+      transition: 0.2s;
+    }
+    .button-grp input[type="button"]:hover {
+      box-shadow: 10px 10px 16.2px rgba(0, 0, 0, 0.1);
+    }
+    .button-grp input[type="button"]:active {
+      opacity: 0.9;
+      box-shadow: 6.3px 8px 12.8px -32px rgba(0, 0, 0, 0.165),
+        50px 50px 102px -32px rgba(0, 0, 0, 0.33);
+    }
+
+    .button-grp input[type="button"].pri {
+      background-color: #1a9ba1;
+      color: white;
+    }
+    .button-grp input[type="button"].pri:hover {
+      background-color: #324b4d;
+    }
+
+    .button-grp input[type="button"].sec {
+      background-color: hsl(185, 12%, 78%);
+    }
+    .button-grp input[type="button"].sec:hover {
+      background-color: hsl(180, 2%, 60%);
+    }
+
+    .button-grp input[type="button"].ter {
+      border: 2px solid #1a9ba1;
+      color: #1a9ba1;
+    }
+    .button-grp input[type="button"].ter:hover {
+      border: 2px solid #324b4d;
+      color: #324b4d;
+    }
+  </style>
+  <body
+    style="
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+        'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+        'Helvetica Neue', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    "
+  >
+    <h2>DropPoint Settings</h2>
+    <hr />
+    <div class="settings">
+      <div class="input-grp">
+        <div class="setting-text">Test Label</div>
+        <label class="switch">
+          <input type="checkbox" name="Test" id="test" />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+    <div class="button-grp">
+      <input type="button" value="Reset to Default" class="ter" />
+      <div class="action-btn">
+        <input type="button" value="Save" class="pri" />
+        <input type="button" value="Cancel" class="sec" />
+      </div>
+    </div>
+  </body>
+</html>

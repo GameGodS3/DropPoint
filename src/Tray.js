@@ -1,5 +1,6 @@
 const { Tray, Menu, nativeImage, app } = require("electron");
 const { droppointDefaultIcon } = require("./Icons");
+const { Settings } = require("./Settings");
 const { Instance } = require("./Window");
 // const { getHistory } = require("./History");
 
@@ -23,18 +24,25 @@ const setTray = () => {
       },
     },
     {
+      label: "Settings",
+      click: function () {
+        const settings = new Settings();
+        settings.openSettings();
+      },
+    },
+    {
       label: "Quit",
       click: function () {
         app.exit();
       },
     },
-    {
-      type: "separator",
-    },
-    {
-      label: "History",
-      enabled: false,
-    },
+    // {
+    //   type: "separator",
+    // },
+    // {
+    //   label: "History",
+    //   enabled: false,
+    // },
   ];
 
   const setTrayHistory = async () => {
