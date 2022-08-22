@@ -7,7 +7,9 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-builder",
-    "release": "electron-builder --publish always"
+    "release": "electron-builder --publish always",
+    "basictest": "node test/basicTest.js",
+    "test": "concurrently --kill-others \"npm run start\" \"npm run basictest\""
   },
   "keywords": [],
   "author": {
@@ -42,9 +44,12 @@
     }
   },
   "dependencies": {
-    "electron-updater": "^4.3.9"
+    "electron-updater": "^4.3.9",
+    "iohook2": "^1.0.6",
+    "robotjs": "^0.6.0"
   },
   "devDependencies": {
+    "concurrently": "^7.3.0",
     "electron": "^13.1.2",
     "electron-builder": "^22.11.7"
   }

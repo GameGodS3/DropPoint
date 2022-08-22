@@ -45,9 +45,9 @@ class Instance {
    * @returns {number} id - Unique ID of the instance | null if not created
    */
   createNewWindow() {
-    const cursorPosition = this.getCursorPos();
-    this.windowConfig.x = cursorPosition.x;
-    this.windowConfig.y = cursorPosition.y;
+    // const cursorPosition = this.getCursorPos();
+    // this.windowConfig.x = cursorPosition.x;
+    // this.windowConfig.y = cursorPosition.y;
 
     this.instance = new BrowserWindow(this.windowConfig);
 
