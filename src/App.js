@@ -1,6 +1,3 @@
-const path = require("path");
-const fs = require("fs");
-
 const { app, BrowserWindow, nativeImage } = require("electron");
 const { autoUpdater } = require("electron-updater");
 const { Instance } = require("./Window");
@@ -44,7 +41,6 @@ app
   //   }
   // })
   .on("before-quit", () => {
-    // DROPPOINT_MAIN.close();
     splashScreen.close();
   })
   .on("will-quit", () => {

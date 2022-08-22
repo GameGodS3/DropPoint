@@ -1,8 +1,10 @@
 const path = require("path");
 
 const { BrowserWindow, screen, nativeImage } = require("electron");
+const Store = require("electron-store");
 
 const { droppointDefaultIcon } = require("./Icons");
+const configOptions = require("./configOptions");
 // const { initHistory } = require("./History");
 require("./RequestHandlers");
 
@@ -18,18 +20,21 @@ class Instance {
   constructor(devFlag = false) {
     this.instance = null;
     this.id = +new Date();
-    this.devFlag = devFlag;
+
+    this.config = new Store(configOptions);
+
+    this.devFlag = this.config.get("debug");
     this.windowConfig = {
       width: devFlag ? null : 200,
       height: devFlag ? null : 200,
-      x: 0, // For creating a session at the top middle of the screen
+      x: 0,
       y: 0,
       transparent: true,
       frame: devFlag ? true : false,
       titleBarStyle: devFlag ? "default" : "hidden",
       resizable: devFlag ? true : false,
       fullscreenable: devFlag ? true : false,
-      alwaysOnTop: true,
+      alwaysOnTop: this.config.get("alwaysOnTop"),
       webPreferences: {
         nodeIntegration: true,
         preload: path.join(__dirname, "preload.js"),
@@ -45,9 +50,14 @@ class Instance {
    * @returns {number} id - Unique ID of the instance | null if not created
    */
   createNewWindow() {
-    const cursorPosition = this.getCursorPos();
-    this.windowConfig.x = cursorPosition.x;
-    this.windowConfig.y = cursorPosition.y;
+    this.config.get("openAtCursorPosition")
+      ? () => {
+          const cursorPosition = this.getCursorPos();
+          this.windowConfig.x = cursorPosition.x;
+          this.windowConfig.y = cursorPosition.y;
+        }
+      : (this.windowConfig.x =
+          screen.getPrimaryDisplay().workArea.width / 2 - 100);
 
     this.instance = new BrowserWindow(this.windowConfig);
 
