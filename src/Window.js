@@ -55,7 +55,7 @@ class Instance {
 
     this.instance.loadURL(`file://${html_path}?id=${this.id}`);
 
-    this.instance.setVisibleOnAllWorkspaces(true);
+    this.instance.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
 
     if (this.devFlag) this.instance.webContents.openDevTools();
 

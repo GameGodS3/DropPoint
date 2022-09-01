@@ -1,7 +1,7 @@
 {
   "name": "droppoint",
   "productName": "DropPoint",
-  "version": "1.2.0",
+  "version": "1.2.0-1",
   "description": "Drag-and-drop assist",
   "main": "./src/App.js",
   "scripts": {
@@ -46,6 +46,6 @@
   },
   "devDependencies": {
     "electron": "^13.1.2",
-    "electron-builder": "^22.11.7"
+    "electron-builder": "^23.0.2"
   }
 }
