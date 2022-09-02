@@ -143,11 +143,14 @@ holder.ondrop = (e) => {
       alert("File already in the instance");
       continue;
     }
+
     // Add the file to the filelist
     filelist.push({
       filepath: f.path.toString(),
       fileType:
-        f.type.split("/")[0] !== "application" ? f.type.split("/")[0] : "file",
+        f.type && f.type.split("/")[0] !== "application"
+          ? f.type.split("/")[0]
+          : "file",
     });
   }
 

@@ -16,7 +16,7 @@ let getFileTypeIcons = (fileList) => {
     if (fileType !== "application") {
       fileType = icons[fileType];
     } else {
-      fileType = icons.file;
+      fileType = icons[file];
     }
   } else {
     fileType = icons.multifile;
