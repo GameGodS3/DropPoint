@@ -144,6 +144,8 @@ holder.ondrop = (e) => {
       continue;
     }
 
+    console.log(`MIME type: ${f.type}`)
+
     // Add the file to the filelist
     filelist.push({
       filepath: f.path.toString(),
