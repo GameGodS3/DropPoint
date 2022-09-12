@@ -16,6 +16,7 @@ const appConfigSchema = {
   },
   shortcutAction: {
     enum: ["toggle", "spawn"],
+    type: "string",
   },
 };
 module.exports = {

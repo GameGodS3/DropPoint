@@ -1,7 +1,8 @@
 const path = require("path");
 
-const { BrowserWindow, webContents } = require("electron");
+const { BrowserWindow, webContents, nativeImage } = require("electron");
 const Store = require("electron-store");
+const { droppointDefaultIcon } = require("./Icons");
 
 class Settings {
   constructor() {
@@ -25,6 +26,7 @@ class Settings {
       height: 350,
       webPreferences: {
         nodeIntegration: true,
+        icon: nativeImage.createFromPath(droppointDefaultIcon),
       },
     });
     this.settings.removeMenu();
