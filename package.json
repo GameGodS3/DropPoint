@@ -5,11 +5,9 @@
   "description": "Drag-and-drop assist",
   "main": "./src/App.js",
   "scripts": {
-    "start": "electron-forge start",
+    "start": "electron .",
     "build": "electron-builder",
-    "release": "electron-builder --publish always",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "release": "electron-builder --publish always"
   },
   "keywords": [],
   "author": {
@@ -44,19 +42,14 @@
     }
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0",
     "electron-store": "^8.1.0",
     "electron-updater": "^4.3.9",
     "preline": "^1.1.2"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.3",
-    "@electron-forge/maker-deb": "^6.0.3",
-    "@electron-forge/maker-rpm": "^6.0.3",
-    "@electron-forge/maker-squirrel": "^6.0.3",
-    "@electron-forge/maker-zip": "^6.0.3",
     "@tailwindcss/forms": "^0.5.3",
-    "electron": "^13.6.9",
+    "electron": "^13.1.2",
+    "electron-builder": "^22.11.7",
     "tailwindcss": "^3.1.8"
   }
 }
