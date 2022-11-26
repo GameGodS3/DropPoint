@@ -3,6 +3,7 @@ const path = require("path");
 const { BrowserWindow, webContents, nativeImage } = require("electron");
 const Store = require("electron-store");
 const { droppointDefaultIcon } = require("./Icons");
+const configOptions = require("./configOptions");
 
 class Settings {
   constructor() {
@@ -26,12 +27,14 @@ class Settings {
       height: 350,
       webPreferences: {
         nodeIntegration: true,
+        preload: path.join(__dirname, "preload.js"),
         icon: nativeImage.createFromPath(droppointDefaultIcon),
       },
     });
+    this.settings.webContents.openDevTools(); // For Debugging purposes
     this.settings.removeMenu();
     const html_path = path.join(__dirname, "../static/settings.html");
-    this.settings.loadURL(`file://${html_path}`);
+    this.settings.loadURL(`file://${html_path}`).then(() => {});
   }
 }
 

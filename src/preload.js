@@ -14,6 +14,26 @@ contextBridge.exposeInMainWorld("electron", {
   debugPrint: (message) => {
     ipcRenderer.send("debugPrint", message);
   },
+  fetchConfig: () => {
+    ipcRenderer.send("fetchConfig");
+  },
+  onConfigReceived: (callback) => ipcRenderer.on("configObj", callback),
+});
+
+// For settings renderer
+let configObj;
+const updateConfigObj = (config) => {
+  configObj = config;
+  console.log(configObj);
+};
+
+ipcRenderer.on("configObj", (event, config) => {
+  configObj = JSON.parse(config);
+  console.log("Ivdethi");
+  const configFileContents = require(configObj.config.path);
+  console.log(configFileContents);
+  ipcRenderer.sendToHost(config);
+  return configFileContents;
 });
 
 ipcRenderer.on("close-signal", (event) => {

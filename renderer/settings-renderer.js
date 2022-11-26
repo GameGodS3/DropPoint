@@ -40,11 +40,19 @@ const enumInput = (enumID, labelText, enumList) => {
   return selectInput;
 };
 
-const configOptions = require("../src/configOptions");
+electron.fetchConfig();
+electron.onConfigReceived((_event, value) => {
+  console.log(`Received configuration: ${value}`);
+  const configObj = JSON.parse(value);
+  const configPath = configObj.config.path;
 
-for (const sch in configOptions.schema) {
-  console.log(sch);
-}
+  // const currentConfig = require(configPath);
+  fetch(configPath)
+    .then((response) => response.json())
+    .then((json) => console.log("Received response: " + JSON.stringify(json)));
+
+  console.log(`Current configuration: ${currentConfig}`);
+});
 
 document
   .querySelector(".settings-content")
@@ -55,3 +63,16 @@ document
       [12, 13, 14, 15]
     )
   );
+
+const configObj = {
+  config: {
+    events: { _events: {}, _eventsCount: 0 },
+    path: "C:\\Users\\sudev\\AppData\\Roaming\\DropPoint\\config.json",
+  },
+  schema: {
+    debug: { type: "boolean" },
+    alwaysOnTop: { type: "boolean" },
+    openAtCursorPosition: { type: "boolean" },
+    shortcutAction: { enum: ["toggle", "spawn"], type: "string" },
+  },
+};

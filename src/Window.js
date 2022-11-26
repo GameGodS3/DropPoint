@@ -25,8 +25,8 @@ class Instance {
 
     this.devFlag = this.config.get("debug");
     this.windowConfig = {
-      width: devFlag ? null : 200,
-      height: devFlag ? null : 200,
+      width: devFlag && 200,
+      height: devFlag && 200,
       x: 0,
       y: 0,
       transparent: true,

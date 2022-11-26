@@ -1,4 +1,7 @@
 const { ipcMain, nativeImage } = require("electron");
+const configOptions = require("./configOptions");
+const Store = require("electron-store");
+
 global.share = { ipcMain };
 
 // const { addToInstanceHistory } = require("./History");
@@ -72,8 +75,24 @@ let debugPrint = ipcMain.on("debugPrint", (event, message) => {
   console.log(message);
 });
 
+/**
+ * Fetching config and schema
+ */
+let fetchConfig = ipcMain.on("fetchConfig", (event) => {
+  const config = new Store(configOptions);
+  const schema = configOptions.schema;
+  event.sender.send(
+    "configObj",
+    JSON.stringify({
+      config: config,
+      schema: schema,
+    })
+  );
+});
+
 module.exports = {
   dragHandler: dragHandler,
   minimiseHandler: minimiseHandler,
   debugPrint: debugPrint,
+  fetchConfig: fetchConfig,
 };

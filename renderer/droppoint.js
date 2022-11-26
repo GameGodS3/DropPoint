@@ -1,6 +1,6 @@
 // Instance ID from Main Process
 const instanceId = parseInt(window.location.search.slice(4));
-console.log("Instance ID: " + instanceId);
+console.log("Instance ID client: " + instanceId);
 
 // File List which will contain list of dicts in the format
 // {filePath:"file/Path", fileType:"filetype"}
