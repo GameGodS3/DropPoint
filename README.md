@@ -92,4 +92,4 @@ Please do refer to our [Contributing Guidelines](https://github.com/GameGodS3/Dr
 ## Related
 
 - Project inspired from [Dropover app](http://dropoverapp.com) in MacOS
-- For a more feature-rich, Linux friendly and GTK-based alternative, checkout [PyDrop](https://github.com/Roshan-R/PyDrop)
+- For a Linux friendly and GTK-based alternative, checkout [PyDrop](https://github.com/Roshan-R/PyDrop)
