@@ -1,6 +1,6 @@
 # DropPoint - Make Drag 'n' Drop easier [![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint)](https://twitter.com/intent/tweet?text=Checkout%20this%20cool%20project!&url=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint)
 
-![DropPoint](https://socialify.git.ci/GameGodS3/DropPoint/image?description=1&logo=https%3A%2F%2Fgithub.com%2FGameGodS3%2FDropPoint%2Fblob%2Fmain%2Fstatic%2Fmedia%2Fdroppoint.ico%3Fraw%3Dtrue&owner=1&theme=Light)
+![DropPoint](https://github.com/GameGodS3/DropPoint/raw/main/static/media/droppoint-social-cover.jpg)
 
 <p align="center">
   <a href="https://www.buymeacoffee.com/sudev">
@@ -22,8 +22,6 @@ Make drag-and-drop easier using DropPoint!
 DropPoint helps you drag content without having to open side-by-side windows
 
 Works on **Windows**, **Linux** and **MacOS**.
-
-Follows Fluent design style to match Windows 11 aesthetics :)
 
 ## Table of Contents
 - [:sparkles: Demo](#sparkles-demo)
@@ -94,4 +92,4 @@ Please do refer to our [Contributing Guidelines](https://github.com/GameGodS3/Dr
 ## Related
 
 - Project inspired from [Dropover app](http://dropoverapp.com) in MacOS
-- For a more feature-rich, Linux friendly and GTK-based alternative, checkout [PyDrop](https://github.com/Roshan-R/PyDrop)
+- For a Linux friendly and GTK-based alternative, checkout [PyDrop](https://github.com/Roshan-R/PyDrop)
