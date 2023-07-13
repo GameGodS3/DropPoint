@@ -29,7 +29,6 @@ const updateConfigObj = (config) => {
 
 ipcRenderer.on("configObj", (event, config) => {
   configObj = JSON.parse(config);
-  console.log("Ivdethi");
   const configFileContents = require(configObj.config.path);
   console.log(configFileContents);
   ipcRenderer.sendToHost(config);
@@ -39,6 +38,6 @@ ipcRenderer.on("configObj", (event, config) => {
 ipcRenderer.on("close-signal", (event) => {
   window.close();
 });
-ipcRenderer.on("history-instance", (event, filelist) => {});
+ipcRenderer.on("history-instance", (event, filelist) => { });
 
 console.log("preload");

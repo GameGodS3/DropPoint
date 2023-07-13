@@ -1,183 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DropPoint</title>
-  </head>
-  <body
-    style="
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DropPoint</title>
+</head>
+
+<body style="
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
         'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
         'Helvetica Neue', sans-serif;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-    "
-  >
-    <div
-      style="
+    ">
+  <div style="
         -webkit-app-region: drag;
         border-radius: 0.5rem;
         width: 100%;
         height: 100%;
-        background-color: hsl(40, 100%, 97%);
-      "
-    >
-      <div class="close" title="Clear">&#215;</div>
-      <div id="droppoint">
-        <div class="upload">
-          <img
-            src="./media/upload.png"
-            alt="Upload Here"
-            style="opacity: 0.8; pointer-events: none"
-          />
-          Drop Your File(s) Here
+        background-color: rgba(255, 250, 240);
+        backdrop-filter: blur(20px) saturate(125%);
+      ">
+    <div class="close" title="Clear">&#215;</div>
+    <div id="droppoint">
+      <div class="upload">
+        <img src="./media/upload.png" alt="Upload Here" style="opacity: 0.8; pointer-events: none" />
+        Drop Your File(s) Here
+      </div>
+      <div id="drag">
+        <div class="file-icon">
+          <img src="" />
+          <img src="" />
+          <img src="" />
         </div>
-        <div id="drag">
-          <div class="file-icon">
-            <img src="" />
-            <img src="" />
-            <img src="" />
-          </div>
-          Drag Your <num></num> File(s) Out
-        </div>
+        Drag Your <num></num> File(s) Out
       </div>
     </div>
-  </body>
-  <style>
-    * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-    }
-    /* Tilt animation keyframes for multiple files */
-    @keyframes tilt {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(25deg);
-        transform-origin: bottom;
-      }
-    }
-    @keyframes tiltmore {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(50deg);
-        transform-origin: bottom;
-      }
-    }
-    html {
-      top: 0;
-      left: 0;
-      width: fit-content;
-      height: fit-content;
-    }
-    body {
-      width: 100vw;
-      height: 100vh;
-    }
-    .close {
-      width: 1rem;
-      height: 1rem;
-      font-size: 0.8rem;
-      display: flex;
-      background-color: #c0c0c0;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      right: 5%;
-      top: 5%;
-      border-radius: 2rem;
-      z-index: 10;
-      cursor: pointer;
-      user-select: none;
-      -webkit-app-region: no-drag;
-    }
-    @keyframes dragged {
-      from {
-        border-radius: 100px;
-        border: 2px dashed #050a0f00;
-      }
-      to {
-        border-radius: 6px;
-        border: 2px dashed #050a0f85;
-      }
-    }
-    .dragged {
-      cursor: grabbing;
-      animation: dragged 0.5s forwards;
-      /* transition: all 0.25s ease-in-out; */
-    }
-    #droppoint {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-55%, -55%);
-      width: 140px;
-      height: 140px;
-      margin: 8px;
-      color: #050a0fa2;
-      user-select: none;
-      border: 2px transparent solid;
-      -webkit-app-region: no-drag;
-      transition: all 0.5s ease-in-out;
-    }
-    .upload {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      text-align: center;
-      flex-direction: column;
-      font-family: sans-serif;
-      user-select: none;
-      align-items: center;
-      justify-content: center;
+  </div>
+</body>
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  /* Tilt animation keyframes for multiple files */
+  @keyframes tilt {
+    from {
+      transform: rotate(0deg);
     }
 
-    img {
-      max-width: 60px;
-      padding: 8px;
+    to {
+      transform: rotate(25deg);
+      transform-origin: bottom;
+    }
+  }
+
+  @keyframes tiltmore {
+    from {
+      transform: rotate(0deg);
     }
 
-    #drag {
-      height: 100%;
-      width: 100%;
-      display: none;
-      text-align: center;
-      flex-direction: column;
-      font-family: sans-serif;
-      align-items: center;
-      justify-content: center;
+    to {
+      transform: rotate(50deg);
+      transform-origin: bottom;
     }
-    .file-icon {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+  }
+
+  html {
+    top: 0;
+    left: 0;
+    width: fit-content;
+    height: fit-content;
+  }
+
+  body {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .close {
+    width: 1rem;
+    height: 1rem;
+    font-size: 0.8rem;
+    display: flex;
+    background-color: #c0c0c0;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    border-radius: 2rem;
+    z-index: 10;
+    cursor: pointer;
+    user-select: none;
+    -webkit-app-region: no-drag;
+  }
+
+  @keyframes dragged {
+    from {
+      border-radius: 100px;
+      border: 2px dashed #050a0f00;
     }
-    .file-icon img {
-      position: absolute;
-      /* box-shadow: 2px 2px 20px #050a0f13; */
-      filter: drop-shadow(2px 2px 4px #050a0f2c);
+
+    to {
+      border-radius: 6px;
+      border: 2px dashed #050a0f85;
     }
-    .file-icon img:nth-child(1) {
-      z-index: 3;
-    }
-    .file-icon img:nth-child(2) {
-      z-index: 2;
-      animation: tilt 0.25s ease forwards;
-      /* transform: translate(10px) rotate(15deg); */
-    }
-    .file-icon img:nth-child(3) {
-      z-index: 1;
-      animation: tiltmore 0.25s ease forwards;
-      /* transform: translate(20px) rotate(30deg); */
-    }
-  </style>
-  <script src="../renderer/droppoint.js"></script>
+  }
+
+  .dragged {
+    cursor: grabbing;
+    animation: dragged 0.5s forwards;
+    /* transition: all 0.25s ease-in-out; */
+  }
+
+  #droppoint {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-55%, -55%);
+    width: 140px;
+    height: 140px;
+    margin: 8px;
+    color: #050a0fa2;
+    user-select: none;
+    border: 2px transparent solid;
+    -webkit-app-region: no-drag;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .upload {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    font-family: sans-serif;
+    user-select: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  img {
+    max-width: 60px;
+    padding: 8px;
+  }
+
+  #drag {
+    height: 100%;
+    width: 100%;
+    display: none;
+    text-align: center;
+    flex-direction: column;
+    font-family: sans-serif;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .file-icon {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .file-icon img {
+    position: absolute;
+    /* box-shadow: 2px 2px 20px #050a0f13; */
+    filter: drop-shadow(2px 2px 4px #050a0f2c);
+  }
+
+  .file-icon img:nth-child(1) {
+    z-index: 3;
+  }
+
+  .file-icon img:nth-child(2) {
+    z-index: 2;
+    animation: tilt 0.25s ease forwards;
+    /* transform: translate(10px) rotate(15deg); */
+  }
+
+  .file-icon img:nth-child(3) {
+    z-index: 1;
+    animation: tiltmore 0.25s ease forwards;
+    /* transform: translate(20px) rotate(30deg); */
+  }
+</style>
+<script src="../renderer/droppoint.js"></script>
+
 </html>

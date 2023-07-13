@@ -1,14 +1,10 @@
 const defaultAppConfig = {
-  debug: false,
   alwaysOnTop: true,
   openAtCursorPosition: false,
   shortcutAction: "toggle",
+  debug: false,
 };
 const appConfigSchema = {
-  debug: {
-    type: "boolean",
-    title: "Enable debug mode",
-  },
   alwaysOnTop: {
     type: "boolean",
     title: "Always on Top",
@@ -21,6 +17,10 @@ const appConfigSchema = {
     enum: ["toggle", "spawn"],
     type: "string",
     title: "Shortcut Behaviour",
+  },
+  debug: {
+    type: "boolean",
+    title: "Enable debug mode",
   },
 };
 module.exports = {

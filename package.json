@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.3",
-    "electron": "^13.1.2",
+    "electron": "^21.3.1",
     "electron-builder": "^22.11.7",
     "tailwindcss": "^3.1.8"
   }
