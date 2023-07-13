@@ -35,37 +35,34 @@ const enumInput = (enumID, labelText, enumList, selectedVal) => {
     >
     ${enumList.map(
     (option) =>
-      `<option value="${option}" selected=${option === selectedVal} >${option[0].toUpperCase() + option.slice(1)}</option>`
+      `<option value="${option}">${option[0].toUpperCase() + option.slice(1)}</option>`
   )}
     </select>
   `;
+  const options = selectInput.getElementsByTagName('option');
 
+  for (let i = 0; i < options.length; i++) {
+    const element = options[i];
+    console.log(element);
+    if (element.value === selectedVal) {
+      element.selected = true;
+    }
+  }
   return selectInput;
 };
 
 window.onload = async () => {
   electron.fetchConfig();
   electron.onConfigReceived(async (_event, value) => {
-    // console.log(`Received configuration: ${value}`);
+
+    // Reading DropPoint config file from system
     const configResponse = JSON.parse(value);
     const configPath = configResponse.config.path;
-
-    // const currentConfig = require(configPath);
-    // fetch(configPath)
-    //   .then((response) => response.json())
-    //   .then((configObj) => {
-    //     Object.entries(configResponse).forEach(([key, value]) => {
-    //       let configType = value.type;
-    //       if (configType === "boolean") {
-    //         document
-    //           .querySelector(".settings-content")
-    //           .appendChild(booleanInput(key, value.title, configObj.key));
-    //       }
-    //     });
-    //   });
     const response = await fetch(configPath);
     const configObj = await response.json();
     console.log(Object.entries(configObj));
+
+
     Object.entries(configObj).forEach(([key, value]) => {
       const configEntrySchema = configResponse.schema[key];
       if (configEntrySchema.type === "boolean") {
@@ -77,6 +74,7 @@ window.onload = async () => {
         configEntrySchema.type === "string" &&
         configEntrySchema.enum
       ) {
+        console.log(`Enum Pair: ${key}, ${value}`);
         document
           .querySelector(".settings-content")
           .appendChild(
