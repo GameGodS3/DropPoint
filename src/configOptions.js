@@ -1,13 +1,18 @@
 const defaultAppConfig = {
+  spawnOnLaunch: true,
   alwaysOnTop: true,
   openAtCursorPosition: false,
   shortcutAction: "toggle",
   debug: false,
 };
 const appConfigSchema = {
+  spawnOnLaunch: {
+    type: "boolean",
+    title: "Open a new instance on launch"
+  },
   alwaysOnTop: {
     type: "boolean",
-    title: "Always on Top",
+    title: "Always on top",
   },
   openAtCursorPosition: {
     type: "boolean",
@@ -16,7 +21,7 @@ const appConfigSchema = {
   shortcutAction: {
     enum: ["toggle", "spawn"],
     type: "string",
-    title: "Shortcut Behaviour",
+    title: "Shortcut behaviour",
   },
   debug: {
     type: "boolean",

@@ -50,14 +50,12 @@ class Instance {
    * @returns {number} id - Unique ID of the instance | null if not created
    */
   createNewWindow() {
-    this.config.get("openAtCursorPosition")
-      ? () => {
-          const cursorPosition = this.getCursorPos();
-          this.windowConfig.x = cursorPosition.x;
-          this.windowConfig.y = cursorPosition.y;
-        }
-      : (this.windowConfig.x =
-          screen.getPrimaryDisplay().workArea.width / 2 - 100);
+    if (this.config.get("openAtCursorPosition")) {
+      const cursorPosition = this.getCursorPos();
+      this.windowConfig.x = cursorPosition.x;
+      this.windowConfig.y = cursorPosition.y;
+    }
+    else this.windowConfig.x = screen.getPrimaryDisplay().workArea.width / 2 - 100;
 
     this.instance = new BrowserWindow(this.windowConfig);
 

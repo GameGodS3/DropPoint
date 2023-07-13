@@ -24,7 +24,7 @@ class Settings {
     this.settings = new BrowserWindow({
       title: "Settings - DropPoint",
       width: 600,
-      height: 350,
+      height: 450,
       webPreferences: {
         nodeIntegration: true,
         preload: path.join(__dirname, "preload.js"),

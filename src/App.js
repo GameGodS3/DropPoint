@@ -1,11 +1,16 @@
 const { app, BrowserWindow, nativeImage } = require("electron");
 const { autoUpdater } = require("electron-updater");
+const Store = require("electron-store");
+const configOptions = require("./configOptions");
+
 const { Instance } = require("./Window");
 const { setShortcut } = require("./Shortcut");
 const { droppointDefaultIcon } = require("./Icons");
 const { setTray } = require("./Tray");
 
+const config = new Store(configOptions);
 let splashScreen;
+
 app
   .on("ready", () => {
     // Splash screen which also helps to run in background and keep app alive
@@ -25,12 +30,13 @@ app
     //   splashScreen.hide();
     // }, 3000);
 
-    if (BrowserWindow.getAllWindows.length === 0) {
+    setTray();
+    setShortcut();
+
+    if (BrowserWindow.getAllWindows.length === 0 && config.get("spawnOnLaunch")) {
       const instance = new Instance();
       const instanceID = instance.createNewWindow();
       if (instanceID !== null) {
-        setTray();
-        setShortcut();
       }
     }
   })
