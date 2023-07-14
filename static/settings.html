@@ -1,43 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Settings - DropPoint</title>
-    <link rel="stylesheet" href="settings.css" />
-    <script src="../node_modules/preline/dist/hs-ui.bundle.js"></script>
-  </head>
 
-  <body class="px-6 h-screen flex flex-col">
-    <h1 class="text-2xl font-bold mb-1 py-4">DropPoint Settings</h1>
-    <hr />
-    <main class="flex flex-col items-center justify-between flex-1 my-4">
-      <div class="settings-content flex flex-col w-full"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings - DropPoint</title>
+  <link rel="stylesheet" href="settings.css" />
+  <script src="../node_modules/preline/dist/hs-ui.bundle.js"></script>
+</head>
 
-      <div class="button-row flex w-full justify-between">
-        <button
-          type="button"
-          class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border-2 border-cyan-900 font-semibold text-cyan-800 hover:text-white hover:bg-cyan-800 hover:border-cyan-800 focus:outline-none focus:ring-2 focus:ring-cyan-800 focus:ring-offset-2 transition-all text-sm dark:hover:bg-cyan-900 dark:border-cyan-900 dark:hover:border-cyan-900 dark:text-white dark:focus:ring-cyan-900 dark:focus:ring-offset-cyan-800"
-        >
-          Reset to Defaults
+<body class="px-6 h-screen flex flex-col">
+  <h1 class="text-2xl font-bold mb-1 py-4">DropPoint Settings</h1>
+  <hr />
+  <main class="flex flex-col items-center justify-between flex-1 my-4">
+    <div class="settings-content flex flex-col w-full"></div>
+
+    <div class="button-row flex w-full justify-between">
+      <button type="button"
+        class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border-2 border-cyan-900 font-semibold text-cyan-800 hover:text-white hover:bg-cyan-800 hover:border-cyan-800 focus:outline-none focus:ring-2 focus:ring-cyan-800 focus:ring-offset-2 transition-all text-sm dark:hover:bg-cyan-900 dark:border-cyan-900 dark:hover:border-cyan-900 dark:text-white dark:focus:ring-cyan-900 dark:focus:ring-offset-cyan-800">
+        Reset to Defaults
+      </button>
+      <div class="action-btns flex gap-2">
+        <button type="button"
+          class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-cyan-500 text-white hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+          onclick="applySettings()">
+          Apply</button><button type="button"
+          class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-gray-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2 transition-all text-sm dark:text-white dark:hover:bg-gray-900 dark:hover:border-gray-900 dark:focus:ring-gray-900 dark:focus:ring-offset-gray-800">
+          Cancel
         </button>
-        <div class="action-btns flex gap-2">
-          <button
-            type="button"
-            class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-cyan-500 text-white hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-          >
-            Apply</button
-          ><button
-            type="button"
-            class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-gray-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2 transition-all text-sm dark:text-white dark:hover:bg-gray-900 dark:hover:border-gray-900 dark:focus:ring-gray-900 dark:focus:ring-offset-gray-800"
-          >
-            Cancel
-          </button>
-        </div>
       </div>
-    </main>
-  </body>
-  <webview preload="../src/preload.js"></webview>
-  <script type="module" src="../renderer/settings-renderer.js"></script>
+    </div>
+  </main>
+</body>
+<webview preload="../src/preload.js"></webview>
+<script type="module" src="../renderer/settings-renderer.js"></script>
+<script>
+  const applySettings = () => {
+    const currentSettings = document.querySelector(".settings-content")
+    const booleanInputs = currentSettings.getElementsByTagName("input");
+    const enumInputs = currentSettings.getElementsByTagName("select");
+
+    const newSettings = {};
+
+    for (var i = 0; i < booleanInputs.length; i++) {
+      var input = booleanInputs[i];
+
+      // Retrieve the name and value of each input element
+      var name = input.name;
+      var value = input.checked;
+
+      newSettings[name] = value;
+      console.log("Boolean value: ", name, value);
+    }
+    for (var i = 0; i < enumInputs.length; i++) {
+      var select = enumInputs[i];
+
+      var name = select.name;
+      var selectedOption = select.options[select.selectedIndex].value;
+
+      newSettings[name] = selectedOption;
+    }
+
+    console.log(newSettings);
+    electron.applySettingsInConfig(newSettings);
+  }
+</script>
+
 </html>

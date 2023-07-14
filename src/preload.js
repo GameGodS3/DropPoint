@@ -17,7 +17,12 @@ contextBridge.exposeInMainWorld("electron", {
   fetchConfig: () => {
     ipcRenderer.send("fetchConfig");
   },
-  onConfigReceived: (callback) => ipcRenderer.on("configObj", callback),
+  onConfigReceived: (callback) => {
+    ipcRenderer.on("configObj", callback)
+  },
+  applySettingsInConfig: (newConfig) => {
+    ipcRenderer.send("applySettings", newConfig)
+  },
 });
 
 // For settings renderer

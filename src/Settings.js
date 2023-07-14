@@ -31,7 +31,7 @@ class Settings {
         icon: nativeImage.createFromPath(droppointDefaultIcon),
       },
     });
-    // this.settings.webContents.openDevTools(); // For Debugging purposes
+    this.settings.webContents.openDevTools(); // For Debugging purposes
     this.settings.removeMenu();
     const html_path = path.join(__dirname, "../static/settings.html");
     this.settings.loadURL(`file://${html_path}`).then(() => { });

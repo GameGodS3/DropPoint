@@ -90,6 +90,15 @@ let fetchConfig = ipcMain.on("fetchConfig", (event) => {
   );
 });
 
+// For applying new settings
+ipcMain.on("applySettings", (event, newSettings) => {
+  const config = new Store(configOptions);
+  console.log("Received new settings in main process");
+  config.set(newSettings);
+  console.log("Applied new settings in main process");
+})
+
+
 module.exports = {
   dragHandler: dragHandler,
   minimiseHandler: minimiseHandler,
