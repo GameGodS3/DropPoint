@@ -17,20 +17,49 @@
     <div class="settings-content flex flex-col w-full"></div>
 
     <div class="button-row flex w-full justify-between">
-      <button type="button"
+      <!-- <button type="button"
         class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border-2 border-cyan-900 font-semibold text-cyan-800 hover:text-white hover:bg-cyan-800 hover:border-cyan-800 focus:outline-none focus:ring-2 focus:ring-cyan-800 focus:ring-offset-2 transition-all text-sm dark:hover:bg-cyan-900 dark:border-cyan-900 dark:hover:border-cyan-900 dark:text-white dark:focus:ring-cyan-900 dark:focus:ring-offset-cyan-800">
         Reset to Defaults
-      </button>
+      </button> -->
       <div class="action-btns flex gap-2">
         <button type="button"
           class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-cyan-500 text-white hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
           onclick="applySettings()">
           Apply</button><button type="button"
-          class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-gray-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2 transition-all text-sm dark:text-white dark:hover:bg-gray-900 dark:hover:border-gray-900 dark:focus:ring-gray-900 dark:focus:ring-offset-gray-800">
+          class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-gray-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2 transition-all text-sm dark:text-white dark:hover:bg-gray-900 dark:hover:border-gray-900 dark:focus:ring-gray-900 dark:focus:ring-offset-gray-800"
+          onclick="window.close()">
           Cancel
         </button>
       </div>
     </div>
+    <div class="toast" id="toast-element" style="display: none;">
+      <img src="./media/tick_icon.svg" alt="" style="height: 1.5rem; margin:0 .5rem;"> Settings applied
+    </div>
+    <style>
+      #toast-element {
+        background-color: #bff3bf;
+        padding: 1rem;
+        color: #5cb46f;
+        font-weight: bold;
+        border-radius: 8px;
+        align-items: center;
+        box-shadow: 0 8px 16px;
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .toast {
+        opacity: 0;
+        transition: all 2s ease-in-out;
+      }
+
+      .toast.show {
+        display: flex;
+        opacity: 1;
+      }
+    </style>
   </main>
 </body>
 <webview preload="../src/preload.js"></webview>
@@ -64,7 +93,22 @@
 
     console.log(newSettings);
     electron.applySettingsInConfig(newSettings);
+    showToast();
   }
+  const showToast = () => {
+    const toastElement = document.getElementById('toast-element');
+    toastElement.style = "";
+    toastElement.classList.add('show');
+
+    // Wait for 2 seconds and then hide the toast
+    setTimeout(() => {
+      toastElement.style = "display: flex;"
+      toastElement.classList.remove('show');
+      setTimeout(() => {
+        toastElement.style = "display: none;"
+      }, 500);
+    }, 2000);
+  };
 </script>
 
 </html>
