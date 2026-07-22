@@ -2,6 +2,28 @@
 
 > Living document. Baseline snapshot taken 2026-07-22, covering `main` up to commit `8f1efa0`. Update this file as decisions get made and features land — don't fork a separate doc per feature.
 
+## 0. Work log
+
+### 2026-07-22 — Repo hygiene + Electron upgrade (branch `claude-contrib`)
+
+Landed:
+
+- **Electron `21.3.1` → `43.2.0`**, `electron-builder` `23.0.2` → `26.15.3`, `electron-updater` `4.3.9` → `6.8.9`. `electron-store` deliberately held at `^8.x` (v9+ is ESM-only; migrating would force a CommonJS→ESM rewrite of the whole main process — out of scope, tracked as a future decision).
+- **Blocker fix — `File.path` removal (Electron 32+).** `renderer/droppoint.js` now resolves dropped-file paths via `window.electron.getPathForFile(f)`, backed by `webUtils.getPathForFile` newly exposed through the `src/preload.js` contextBridge. Without this, drag-in throws on every drop on Electron 43.
+- **CI modernized.** `.github/workflows/build.yml`: `checkout@v1`/`setup-node@v1` → `@v4`, Node 18 → 22 (Electron 43 requires ≥22.12), and the archived `samuelmeuli/action-electron-builder` replaced with explicit `npm ci` + `npm run build` / `npm run release` steps (release still gated on `v*` tags). Added a `smoke_test` job (ubuntu + xvfb).
+- **Smoke test added.** `test/smoke.spec.js` (Playwright `_electron`) boots the app and asserts the shelf window opens and the `getPathForFile` bridge is exposed — directly guarding the blocker fix. `npm test` runs it. Resolves the "zero automated tests" gap for the boot path.
+- **Cleanup.** Removed the dead `<webview>` tag from `static/settings.html` (never functional — `webviewTag` was never enabled). Updated README's OS-support floor (Windows 10+, macOS 12 Monterey+) per Electron 43's raised minimums.
+
+Deliberately **skipped** this pass (see §4 annotations):
+
+- `nodeIntegration: true` → `false` + `contextIsolation`/`sandbox` hardening. Still functional on v43; the user flagged `nodeIntegration: true` as a likely deliberate workaround for a past bug, so it's left untouched pending its own investigation.
+
+Known limitations of this pass:
+
+- **Not verified in this environment.** The Electron binary can't be downloaded in the planning sandbox (GitHub release download is 403-blocked; only the npm registry is reachable), so the app was never booted here. The smoke test parses and is discovered locally (`playwright test --list`) but its first *real* execution is in CI / on a dev machine. Transparent/frameless/shadowed window rendering and Tray-under-xvfb behavior are the specific things to watch on that first run.
+
+Follow-up not yet done: **prune stale branches** `imgbot` and `v1.2.0-patch` — `git push --delete` is 403-blocked by the managed git endpoint, so these need deleting via the GitHub UI. (`claude/project-overview-planning-w5yym2` was already gone; `test-suite` and `release` intentionally kept.) PR #36 (ImgBot) was closed.
+
 ## 1. What DropPoint is
 
 DropPoint is a cross-platform (Windows/macOS/Linux) Electron desktop utility that acts as a drag-and-drop "shelf". You summon a small floating window with a global shortcut (`Shift+CapsLock` on Windows/Linux, `Shift+Tab` on macOS), drag files into it from one location, then drag them back out at a different location — including across virtual desktops/workspaces and while other apps are fullscreen. It avoids having to tile two windows side-by-side just to move files between them.
@@ -135,13 +157,13 @@ sequenceDiagram
 
 - **Repeated `Store` instantiation.** `App.js`, `Window.js`, `Shortcut.js`, `RequestHandlers.js`, and `Settings.js` each do their own `new Store(configOptions)` instead of sharing one instance/module. Works because `electron-store` is file-backed, but invites schema drift and redundant I/O.
 - **Shared preload script conflates two windows' concerns.** Both the shelf window and the settings window load the same `src/preload.js`, which exposes settings-only IPC (`fetchConfig`, `onConfigReceived`, `applySettingsInConfig`) to the shelf renderer and vice versa — unnecessary surface area per window.
-- **Mixed-era security posture.** `nodeIntegration: true` is set on `BrowserWindow`s *and* a `contextBridge`-based preload is used. The contextBridge pattern assumes reliance on `contextIsolation` (on by default since Electron 12) instead of `nodeIntegration`. Leaving `nodeIntegration: true` on widens attack surface for no benefit — this is exactly what issue #51 flags.
+- **Mixed-era security posture.** `nodeIntegration: true` is set on `BrowserWindow`s *and* a `contextBridge`-based preload is used. The contextBridge pattern assumes reliance on `contextIsolation` (on by default since Electron 12) instead of `nodeIntegration`. Leaving `nodeIntegration: true` on widens attack surface for no benefit — this is exactly what issue #51 flags. _(2026-07-22: deliberately left as-is — `nodeIntegration: true` is a suspected intentional workaround for a past bug; revisit with its own investigation rather than flipping it blind.)_
 - **`History.js` persistence bug.** Writes to a bare relative path `"instanceHistory.json"` (resolved against CWD, not a stable app data directory) — lands in whatever directory the app happened to be launched from, not a predictable location. Must be fixed as part of finishing the feature.
 - **Dead code left via commenting, not removal.** Tray history submenu, `History` init calls, splash-screen timers are all commented-out rather than deleted, scattered across `App.js`/`Window.js`/`Tray.js` — raises cognitive load reading the main process.
 - **No single-instance coordination.** Every shortcut press / tray click spawns a brand-new `BrowserWindow`/`Instance`, with no `app.requestSingleInstanceLock()` or shared registry beyond the in-memory `Instance` class. Intentional today (multi-shelf is a feature), but will need a rethink once CLI control exists — a CLI invocation needs to *talk to* a running instance, not just spawn another one.
 - **Settings renderer ships a dead fixture.** `renderer/settings-renderer.js` still contains a large hardcoded `configResponse`/`configObj` stub object left over from before the dynamic config-driven UI was wired up — unused but shipped.
-- **Zero automated tests, no type checking.** Plain CommonJS JS, JSDoc only on a handful of functions. Any refactor (especially the Electron major-version upgrade) is currently unverifiable except by manual testing across three OSes.
-- **Electron is ~4 majors behind** (v21, Nov 2022, vs. current ~v37). Upgrading is entangled with the `nodeIntegration`/`contextIsolation` cleanup above, so they should land together rather than as separate efforts.
+- **Zero automated tests, no type checking.** Plain CommonJS JS, JSDoc only on a handful of functions. Any refactor (especially the Electron major-version upgrade) is currently unverifiable except by manual testing across three OSes. _(2026-07-22: first automated test added — `test/smoke.spec.js` boots the app and checks the preload bridge. Still no type checking and no coverage beyond the boot path.)_
+- **Electron is ~4 majors behind** (v21, Nov 2022, vs. current ~v37). ~~Upgrading is entangled with the `nodeIntegration`/`contextIsolation` cleanup above, so they should land together rather than as separate efforts.~~ _(2026-07-22: **done** — upgraded to Electron 43.2.0. The `nodeIntegration` cleanup was intentionally decoupled and deferred rather than bundled in.)_
 
 ## 5. Backlog snapshot (26 open issues, 2 stale open PRs)
 
@@ -151,7 +173,7 @@ Grouped by theme, cross-referenced to the priorities picked for the next phase (
 |---|---|---|
 | **Move mode (not just copy)** | #9, #45 | Prioritized next |
 | **Configurable shortcuts** | #52, #42, #10 (meta) | Prioritized next |
-| **Electron/security modernization** | #51 | Prioritized next |
+| **Electron/security modernization** | #51 | Electron upgrade **done** (2026-07-22); `nodeIntegration`/navigation-guard hardening from #51 still open |
 | **Instance file history** | (feature exists, disabled) | Prioritized next — finish it |
 | CLI / external automation | #55 | Backlog, not prioritized now |
 | Multi-monitor support | #8 | Backlog |
@@ -160,7 +182,7 @@ Grouped by theme, cross-referenced to the priorities picked for the next phase (
 | Auto-sense drag / gesture launch | #46, #4 | Backlog |
 | Homebrew / ARM Windows packaging | #37, #54 | Backlog |
 | Launch-minimized / no-instance-on-startup | #38, #43 | Already partially addressed (`spawnOnLaunch` setting exists) |
-| Stale open PRs | #35 (macOS shortcut → Option+Tab), #36 (ImgBot image optimization) | Need a decision: merge, close, or supersede |
+| Stale open PRs | #35 (macOS shortcut → Option+Tab), ~~#36 (ImgBot)~~ | #36 **closed** (2026-07-22). #35 left open — may be superseded by configurable-shortcuts work |
 
 ## 6. Future architecture (tentative)
 

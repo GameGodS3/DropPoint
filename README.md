@@ -23,6 +23,8 @@ DropPoint helps you drag content without having to open side-by-side windows
 
 Works on **Windows**, **Linux** and **MacOS**.
 
+> **Minimum OS versions:** Windows 10 or later, macOS 12 (Monterey) or later, and a modern 64-bit Linux distribution. Older releases (pre-`1.3.x`) are available for legacy systems on the [Releases Page](https://github.com/GameGodS3/DropPoint/releases).
+
 ## Table of Contents
 - [:sparkles: Demo](#sparkles-demo)
   * [Across maximized windows in the same desktop](#across-maximized-windows-in-the-same-desktop)
