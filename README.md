@@ -69,7 +69,9 @@ Go to the [Releases Page](https://github.com/GameGodS3/DropPoint/releases) to do
 
 ## :gear: Developer Installation
 
-**You must have NPM and Git installed in your PC**
+**You must have Node.js and Git installed in your PC.**
+
+> Use **Node.js 22 LTS** (the version this project is built and tested against — see `.nvmrc`). Newer non-LTS "Current" releases such as Node 26 have ESM module-resolution regressions that break Electron's binary install (`@electron/get` fails to load `sumchecker`). If you use [nvm](https://github.com/nvm-sh/nvm), run `nvm use`.
 
 1. Clone repo and change into directory
    ```bash
