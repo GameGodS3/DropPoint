@@ -34,7 +34,22 @@ async function getShelfWindow(app, timeoutMs = 20_000) {
 }
 
 test("app boots and exposes the drag-out preload bridge", async () => {
-  const app = await electron.launch({ args: [APP_ROOT] });
+  // --no-sandbox / --disable-gpu are required for Electron to boot reliably
+  // under xvfb in CI; without them the transparent shelf window wedges the
+  // GPU/sandbox process and launch never settles.
+  const app = await electron.launch({
+    args: [
+      APP_ROOT,
+      "--no-sandbox",
+      "--disable-gpu",
+      "--disable-dev-shm-usage",
+      "--disable-software-rasterizer",
+    ],
+  });
+
+  // Surface main-process output so any CI failure is diagnosable.
+  app.process().stdout?.on("data", (d) => process.stdout.write(`[electron] ${d}`));
+  app.process().stderr?.on("data", (d) => process.stdout.write(`[electron:err] ${d}`));
 
   try {
     const shelf = await getShelfWindow(app);
