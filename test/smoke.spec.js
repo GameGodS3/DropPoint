@@ -15,22 +15,21 @@ const { test, expect, _electron: electron } = require("@playwright/test");
 const APP_ROOT = path.join(__dirname, "..");
 
 /**
- * Finds the shelf window by title, skipping the hidden splash BrowserWindow
- * that App.js creates first (it loads no content and has no title).
+ * Finds the shelf window by URL. App.js creates a hidden splash BrowserWindow
+ * first that never loads any content — evaluating on it (e.g. `.title()`) can
+ * hang, so we match on `win.url()` (Playwright's cached URL, no in-page eval)
+ * and look for the shelf's index.html.
  */
-async function getShelfWindow(app, timeoutMs = 20_000) {
+async function getShelfWindow(app, timeoutMs = 30_000) {
   const deadline = Date.now() + timeoutMs;
   while (Date.now() < deadline) {
     for (const win of app.windows()) {
-      try {
-        if ((await win.title()) === "DropPoint") return win;
-      } catch {
-        // Window may still be initializing; ignore and retry.
-      }
+      if (win.url().includes("index.html")) return win;
     }
-    await new Promise((resolve) => setTimeout(resolve, 250));
+    await new Promise((resolve) => setTimeout(resolve, 200));
   }
-  throw new Error('Shelf window (title "DropPoint") never appeared');
+  const urls = app.windows().map((w) => w.url() || "(blank)").join(", ");
+  throw new Error(`Shelf window (index.html) never appeared. Windows: [${urls}]`);
 }
 
 test("app boots and exposes the drag-out preload bridge", async () => {
@@ -53,14 +52,17 @@ test("app boots and exposes the drag-out preload bridge", async () => {
 
   try {
     const shelf = await getShelfWindow(app);
-    await expect(shelf).toHaveTitle("DropPoint");
+    await shelf.waitForLoadState("domcontentloaded");
 
-    // The File.path replacement must be reachable from the shelf renderer,
-    // or drag-out is dead on the upgraded Electron.
-    const hasGetPathForFile = await shelf.evaluate(
-      () => typeof window.electron?.getPathForFile === "function"
-    );
-    expect(hasGetPathForFile).toBe(true);
+    // Read title and the File.path replacement in one eval. getPathForFile
+    // must be reachable from the shelf renderer, or drag-out is dead on the
+    // upgraded Electron.
+    const result = await shelf.evaluate(() => ({
+      title: document.title,
+      hasGetPathForFile: typeof window.electron?.getPathForFile === "function",
+    }));
+    expect(result.title).toBe("DropPoint");
+    expect(result.hasGetPathForFile).toBe(true);
   } finally {
     await app.close();
   }
