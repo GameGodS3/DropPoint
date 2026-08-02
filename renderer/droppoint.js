@@ -145,7 +145,7 @@ holder.ondrop = (e) => {
     }
     // Add the file to the filelist
     filelist.push({
-      filepath: f.path.toString(),
+      filepath: window.electron.getPathForFile(f),
       fileType:
         f.type.split("/")[0] !== "application" ? f.type.split("/")[0] : "file",
     });

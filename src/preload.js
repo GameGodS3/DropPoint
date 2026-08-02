@@ -1,7 +1,10 @@
-const { contextBridge, ipcRenderer } = require("electron");
+const { contextBridge, ipcRenderer, webUtils } = require("electron");
 // const path = require("path");
 
 contextBridge.exposeInMainWorld("electron", {
+  // Resolves the absolute path of a dropped File. Replaces the removed
+  // File.path property (dropped in Electron 32+); must run in the preload.
+  getPathForFile: (file) => webUtils.getPathForFile(file),
   getLatestInstanceId: () => {
     ipcRenderer.send("getLatestInstanceId");
   },

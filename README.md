@@ -23,6 +23,8 @@ DropPoint helps you drag content without having to open side-by-side windows
 
 Works on **Windows**, **Linux** and **MacOS**.
 
+> **Minimum OS versions:** Windows 10 or later, macOS 12 (Monterey) or later, and a modern 64-bit Linux distribution. Older releases (pre-`1.3.x`) are available for legacy systems on the [Releases Page](https://github.com/GameGodS3/DropPoint/releases).
+
 ## Table of Contents
 - [:sparkles: Demo](#sparkles-demo)
   * [Across maximized windows in the same desktop](#across-maximized-windows-in-the-same-desktop)
@@ -67,7 +69,9 @@ Go to the [Releases Page](https://github.com/GameGodS3/DropPoint/releases) to do
 
 ## :gear: Developer Installation
 
-**You must have NPM and Git installed in your PC**
+**You must have Node.js and Git installed in your PC.**
+
+> Use **Node.js 22 LTS** (the version this project is built and tested against — see `.nvmrc`). Newer non-LTS "Current" releases such as Node 26 have ESM module-resolution regressions that break Electron's binary install (`@electron/get` fails to load `sumchecker`). If you use [nvm](https://github.com/nvm-sh/nvm), run `nvm use`.
 
 1. Clone repo and change into directory
    ```bash

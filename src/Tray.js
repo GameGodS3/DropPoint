@@ -4,9 +4,14 @@ const { Settings } = require("./Settings");
 const { Instance } = require("./Window");
 // const { getHistory } = require("./History");
 
-let trayIcon = nativeImage
-  .createFromPath(droppointDefaultIcon)
-  .resize({ width: 16 });
+// On Windows, hand the multi-resolution .ico straight to the tray so the OS
+// can pick the DPI-appropriate frame. Resizing a nativeImage built from an
+// .ico down to a fixed 16px renders a blank (but still clickable) tray icon
+// on HiDPI Windows displays. macOS/Linux expect a small ~16px image.
+let trayIcon = nativeImage.createFromPath(droppointDefaultIcon);
+if (process.platform !== "win32") {
+  trayIcon = trayIcon.resize({ width: 16 });
+}
 
 let tray;
 

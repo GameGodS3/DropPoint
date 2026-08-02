@@ -1,6 +1,9 @@
 /node_modules/
 /node_modules/*
 /release_builds/
+/dist/
+/test-results/
+/playwright-report/
 build_installer.js
 test.html
 instanceHistory.json
