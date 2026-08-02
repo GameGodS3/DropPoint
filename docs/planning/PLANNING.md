@@ -22,6 +22,15 @@ Known limitations of this pass:
 
 - **Not verified in this environment.** The Electron binary can't be downloaded in the planning sandbox (GitHub release download is 403-blocked; only the npm registry is reachable), so the app was never booted here. The smoke test parses and is discovered locally (`playwright test --list`) but its first *real* execution is in CI / on a dev machine. Transparent/frameless/shadowed window rendering and Tray-under-xvfb behavior are the specific things to watch on that first run.
 
+### 2026-08-01 — CI failures fixed (PR #57)
+
+First real CI run on PR #57 surfaced two issues, now fixed:
+
+- **All 3 build jobs** failed schema validation: `win.publisherName` is invalid in electron-builder 26 (`WindowsConfiguration` is `additionalProperties: false`; `publisherName` moved to the Windows signing config). Removed it — the app doesn't code-sign, so it was a no-op anyway.
+- **smoke_test** timed out: the Electron binary was downloading *during* the test, racing the 60s timeout. Added a `node node_modules/electron/install.js` pre-download step before `npm test` and raised the Playwright timeout to 120s.
+
+---
+
 Follow-up not yet done: **prune stale branches** `imgbot` and `v1.2.0-patch` — `git push --delete` is 403-blocked by the managed git endpoint, so these need deleting via the GitHub UI. (`claude/project-overview-planning-w5yym2` was already gone; `test-suite` and `release` intentionally kept.) PR #36 (ImgBot) was closed.
 
 ## 1. What DropPoint is

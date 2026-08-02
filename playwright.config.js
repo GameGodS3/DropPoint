@@ -7,7 +7,9 @@ const { defineConfig } = require("@playwright/test");
 module.exports = defineConfig({
   testDir: "./test",
   testMatch: "**/*.spec.js",
-  timeout: 60_000,
+  // Generous timeout: the first Electron launch on a cold CI runner can be
+  // slow even with the binary pre-downloaded.
+  timeout: 120_000,
   workers: 1,
   fullyParallel: false,
   reporter: "list",
