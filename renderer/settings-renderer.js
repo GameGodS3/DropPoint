@@ -53,6 +53,29 @@ const enumInput = (enumID, labelText, enumList, selectedVal) => {
   return selectInput;
 };
 
+const numberInput = (numberID, labelText, value, min) => {
+  let wrapper = document.createElement("div");
+  wrapper.classList = "flex items-center justify-between w-full";
+
+  wrapper.innerHTML = `
+    <label
+    class="text-base w-full text-gray-600 mx-3 dark:text-gray-400"
+    for="${numberID}">
+    ${labelText}
+    </label>
+
+    <input
+    type="number"
+    id="${numberID}"
+    name="${numberID}"
+    min="${min ?? 1}"
+    value="${value}"
+    class="py-3 px-4 block w-24 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+    />
+  `;
+  return wrapper;
+};
+
 window.onload = async () => {
   electron.fetchConfig();
   electron.onConfigReceived(async (_event, value) => {
@@ -85,6 +108,17 @@ window.onload = async () => {
               configEntrySchema.title,
               configEntrySchema.enum,
               value
+            )
+          );
+      } else if (configEntrySchema.type === "number") {
+        document
+          .querySelector(".settings-content")
+          .appendChild(
+            numberInput(
+              key,
+              configEntrySchema.title,
+              value,
+              configEntrySchema.minimum
             )
           );
       }

@@ -74,3 +74,14 @@ test("File.path fix stays wired: preload exposes getPathForFile, renderer uses i
   // The removed Electron API must not creep back in.
   expect(renderer).not.toMatch(/f\.path/);
 });
+
+test("history persists under userData, not a bare CWD-relative path", () => {
+  const history = fs.readFileSync(path.join(APP_ROOT, "src/History.js"), "utf8");
+
+  // The history file must be resolved under the app's userData dir.
+  expect(history).toMatch(
+    /path\.join\(\s*app\.getPath\(["']userData["']\)\s*,\s*["']instanceHistory\.json["']\s*\)/
+  );
+  // No fs call may take the bare relative filename (the original CWD bug).
+  expect(history).not.toMatch(/fs\.\w+\(\s*["']instanceHistory\.json["']/);
+});

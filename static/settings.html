@@ -66,20 +66,27 @@
 <script>
   const applySettings = () => {
     const currentSettings = document.querySelector(".settings-content")
-    const booleanInputs = currentSettings.getElementsByTagName("input");
+    const inputs = currentSettings.getElementsByTagName("input");
     const enumInputs = currentSettings.getElementsByTagName("select");
 
     const newSettings = {};
 
-    for (var i = 0; i < booleanInputs.length; i++) {
-      var input = booleanInputs[i];
-
-      // Retrieve the name and value of each input element
+    for (var i = 0; i < inputs.length; i++) {
+      var input = inputs[i];
       var name = input.name;
-      var value = input.checked;
 
-      newSettings[name] = value;
-      console.log("Boolean value: ", name, value);
+      if (input.type === "number") {
+        // Fall back to the min (or 1) when the field is empty or not a number.
+        var parsed = parseInt(input.value, 10);
+        var min = parseInt(input.min, 10);
+        newSettings[name] = Number.isNaN(parsed)
+          ? (Number.isNaN(min) ? 1 : min)
+          : parsed;
+        console.log("Number value: ", name, newSettings[name]);
+      } else {
+        newSettings[name] = input.checked;
+        console.log("Boolean value: ", name, input.checked);
+      }
     }
     for (var i = 0; i < enumInputs.length; i++) {
       var select = enumInputs[i];

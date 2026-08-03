@@ -5,7 +5,6 @@ const Store = require("electron-store");
 
 const { droppointDefaultIcon } = require("./Icons");
 const configOptions = require("./configOptions");
-// const { initHistory } = require("./History");
 require("./RequestHandlers");
 
 class Instance {
@@ -47,9 +46,11 @@ class Instance {
 
   /**
    * Creates a new DropPoint Instance
+   * @param {Array<{filepath: string, fileType: string}>} [seedFiles] - Files to
+   *   pre-load the shelf with (e.g. when reopening a history entry). Optional.
    * @returns {number} id - Unique ID of the instance | null if not created
    */
-  createNewWindow() {
+  createNewWindow(seedFiles = null) {
     if (this.config.get("openAtCursorPosition")) {
       const cursorPosition = this.getCursorPos();
       this.windowConfig.x = cursorPosition.x;
@@ -75,10 +76,15 @@ class Instance {
 
     this.instance.on("closed", () => (this.instance = null));
 
-    console.log(`Instance ID: ${this.id}`);
+    // Seed the shelf with files when reopening a history entry, once the
+    // renderer has loaded and can receive them.
+    if (seedFiles && seedFiles.length) {
+      this.instance.webContents.once("did-finish-load", () => {
+        this.instance.webContents.send("history-instance", seedFiles);
+      });
+    }
 
-    // Create a history for instance
-    // initHistory(this.id);
+    console.log(`Instance ID: ${this.id}`);
 
     return this.instance ? this.id : null;
   }

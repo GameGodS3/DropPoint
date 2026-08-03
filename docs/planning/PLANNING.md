@@ -4,6 +4,17 @@
 
 ## 0. Work log
 
+### 2026-08-03 — Instance file history revived (branch `claude-contrib`)
+
+Finished the previously dead History feature as **clickable reopen**:
+
+- **`src/History.js` rewritten & re-enabled.** Persists to `path.join(app.getPath("userData"), "instanceHistory.json")` (was a bare CWD-relative path). `getHistory` no longer rejects/`app.quit()`s on a missing/corrupt file; `setHistory` resolves inside the write callback. `addToInstanceHistory(instanceId, files, max)` is now an upsert that caps to the last `max` entries. `initHistory` (empty-entry pre-creation) removed.
+- **Recording.** `RequestHandlers.js` `ondragstart` now records the dragged-out files (gated by the `saveHistory` setting) and emits `history-updated`.
+- **Tray.** `src/Tray.js` shows the last 5 drag-outs (date/time + `path.basename` summary, fixed the `filePath`→`filepath` bug); clicking one filters to still-existing files and reopens a shelf pre-seeded with them. Menu rebuilds on `history-updated`.
+- **Reopen seeding.** `Window.js#createNewWindow(seedFiles)` sends `history-instance` after `did-finish-load`; `preload.js` exposes `onHistoryInstance`; `renderer/droppoint.js` populates `filelist` and flips to drag-out state.
+- **Settings.** New `saveHistory` (bool, privacy toggle) and `maxHistory` (number, default 20) in `configOptions.js`. Added a reusable **number input type** to the schema-driven settings UI (`settings-renderer.js` + `settings.html`) — it only had boolean/enum before.
+- **Test.** Added a source-guard test asserting History uses the `userData` path.
+
 ### 2026-07-22 — Repo hygiene + Electron upgrade (branch `claude-contrib`)
 
 Landed:
@@ -183,7 +194,7 @@ Grouped by theme, cross-referenced to the priorities picked for the next phase (
 | **Move mode (not just copy)** | #9, #45 | Prioritized next |
 | **Configurable shortcuts** | #52, #42, #10 (meta) | Prioritized next |
 | **Electron/security modernization** | #51 | Electron upgrade **done** (2026-07-22); `nodeIntegration`/navigation-guard hardening from #51 still open |
-| **Instance file history** | (feature exists, disabled) | Prioritized next — finish it |
+| **Instance file history** | (feature exists, disabled) | **Done** (2026-08-03) — revived as clickable reopen |
 | CLI / external automation | #55 | Backlog, not prioritized now |
 | Multi-monitor support | #8 | Backlog |
 | Packaging/signing friction (macOS Gatekeeper) | #47 | Backlog |
@@ -241,7 +252,7 @@ Unresolved by design — answer these before implementation starts on the corres
 
 - **Move mode**: implement via post-drop source deletion (needs reliable drop-confirmation, since native OS drag doesn't report the actual drop effect back to Electron), or via a modifier-key toggle at drag-out time?
 - **Configurable shortcuts**: `Shortcut.js` currently registers once at startup; changing it from Settings requires an app restart. Do we want live re-registration on save, and what does the rebind UI look like (raw key-combo capture vs. preset dropdown)?
-- **History**: once fixed, should tray history entries be clickable to reopen those files into a new instance, or stay display-only as today?
+- ~~**History**: once fixed, should tray history entries be clickable to reopen those files into a new instance, or stay display-only as today?~~ _(Resolved 2026-08-03: clickable reopen — tray entries open a shelf pre-seeded with the still-existing files.)_
 - **Electron upgrade sequencing**: bump straight to latest, or stage it? Given zero tests today, should the test strategy land *before* or *alongside* the upgrade?
 - **Test strategy**: unit-only for pure logic vs. adding an E2E harness for actual drag-and-drop (candidates: Playwright's Electron support, WebdriverIO's electron-service) — no decision yet.
 - **Stale PRs**: what to do with #35 (macOS shortcut change) and #36 (ImgBot) — merge, close, or let the configurable-shortcuts work supersede #35 entirely?

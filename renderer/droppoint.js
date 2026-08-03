@@ -183,3 +183,15 @@ document.getElementById("drag").ondragstart = (event) => {
 document.querySelector(".close").addEventListener("click", () => {
   window.close();
 });
+
+// Reopened from history: pre-populate the shelf with the given files and flip
+// straight to the "drag out" state. Pushing into filelist reuses the file-push
+// event that drives the icon stack + count.
+window.electron.onHistoryInstance((_event, files) => {
+  if (!files || files.length === 0) return;
+  for (const f of files) {
+    filelist.push({ filepath: f.filepath, fileType: f.fileType });
+  }
+  uploadArea.style.display = "none";
+  dragOutArea.style.display = "flex";
+});

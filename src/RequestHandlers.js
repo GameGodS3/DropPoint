@@ -1,10 +1,10 @@
-const { ipcMain, nativeImage } = require("electron");
+const { app, ipcMain, nativeImage } = require("electron");
 const configOptions = require("./configOptions");
 const Store = require("electron-store");
 
 global.share = { ipcMain };
 
-// const { addToInstanceHistory } = require("./History");
+const { addToInstanceHistory } = require("./History");
 const icons = require("./Icons");
 
 /**
@@ -56,7 +56,17 @@ let dragHandler = ipcMain.on("ondragstart", (event, params) => {
     files: filePathList,
     icon: nativeImage.createFromPath(fileTypeIcons).resize({ width: 64 }),
   });
-  // addToInstanceHistory(params.instanceId, params.filelist);
+
+  const config = new Store(configOptions);
+  if (config.get("saveHistory")) {
+    addToInstanceHistory(
+      params.instanceId,
+      params.filelist,
+      config.get("maxHistory")
+    );
+    app.emit("history-updated");
+  }
+
   event.sender.send("close-signal");
 });
 

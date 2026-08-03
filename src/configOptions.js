@@ -3,6 +3,8 @@ const defaultAppConfig = {
   alwaysOnTop: true,
   openAtCursorPosition: false,
   shortcutAction: "toggle",
+  saveHistory: true,
+  maxHistory: 20,
   debug: false,
 };
 const appConfigSchema = {
@@ -22,6 +24,15 @@ const appConfigSchema = {
     enum: ["toggle", "spawn"],
     type: "string",
     title: "Shortcut behaviour",
+  },
+  saveHistory: {
+    type: "boolean",
+    title: "Save drag-out history",
+  },
+  maxHistory: {
+    type: "number",
+    title: "Max history entries",
+    minimum: 1,
   },
   debug: {
     type: "boolean",

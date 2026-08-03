@@ -26,6 +26,11 @@ contextBridge.exposeInMainWorld("electron", {
   applySettingsInConfig: (newConfig) => {
     ipcRenderer.send("applySettings", newConfig)
   },
+  // Receives the file list when a shelf is reopened from history, so the
+  // renderer can pre-populate itself.
+  onHistoryInstance: (callback) => {
+    ipcRenderer.on("history-instance", callback)
+  },
 });
 
 // For settings renderer
@@ -46,6 +51,5 @@ ipcRenderer.on("configObj", (event, config) => {
 ipcRenderer.on("close-signal", (event) => {
   window.close();
 });
-ipcRenderer.on("history-instance", (event, filelist) => { });
 
 console.log("preload");
