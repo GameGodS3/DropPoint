@@ -35,9 +35,13 @@ const getHistory = () => {
  */
 const setHistory = (historyObj) => {
   return new Promise((resolve, reject) => {
-    fs.writeFile(historyPath, JSON.stringify(historyObj), { flag: "w" }, (e) => {
-      if (e) reject(e);
-      else resolve();
+    // The userData dir normally exists, but ensure it before writing so a
+    // first-run race can't drop the history file.
+    fs.mkdir(path.dirname(historyPath), { recursive: true }, () => {
+      fs.writeFile(historyPath, JSON.stringify(historyObj), { flag: "w" }, (e) => {
+        if (e) reject(e);
+        else resolve();
+      });
     });
   });
 };

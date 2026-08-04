@@ -48,7 +48,7 @@ let getFilePathList = (fileList) => {
  *
  * @param {Array} fileList - List of files
  */
-let dragHandler = ipcMain.on("ondragstart", (event, params) => {
+let dragHandler = ipcMain.on("ondragstart", async (event, params) => {
   console.log("Params - filelist: " + JSON.stringify(params));
   let fileTypeIcons = getFileTypeIcons(params.filelist);
   let filePathList = getFilePathList(params.filelist);
@@ -57,17 +57,20 @@ let dragHandler = ipcMain.on("ondragstart", (event, params) => {
     icon: nativeImage.createFromPath(fileTypeIcons).resize({ width: 64 }),
   });
 
+  // Close the shelf immediately; recording history must not block it.
+  event.sender.send("close-signal");
+
   const config = new Store(configOptions);
   if (config.get("saveHistory")) {
-    addToInstanceHistory(
+    // Await the write before refreshing the tray, otherwise the menu would
+    // rebuild from the pre-write (stale) history and the entry wouldn't appear.
+    await addToInstanceHistory(
       params.instanceId,
       params.filelist,
       config.get("maxHistory")
     );
     app.emit("history-updated");
   }
-
-  event.sender.send("close-signal");
 });
 
 /**
