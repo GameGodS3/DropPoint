@@ -4,7 +4,7 @@ const { Tray, Menu, nativeImage, app } = require("electron");
 const { droppointDefaultIcon } = require("./Icons");
 const { Settings } = require("./Settings");
 const { Instance } = require("./Window");
-const { getHistory } = require("./History");
+const { getHistory, clearHistory } = require("./History");
 
 // On Windows, hand the multi-resolution .ico straight to the tray so the OS
 // can pick the DPI-appropriate frame. Resizing a nativeImage built from an
@@ -57,37 +57,39 @@ const reopenFromHistory = (files) => {
  * @param {{history: Array}} history
  */
 const buildTrayMenu = (history) => {
-  const menu = [
-    {
-      label: "New Instance",
-      click: () => new Instance().createNewWindow(),
-    },
-    {
-      label: "Settings",
-      click: () => new Settings().openSettings(),
-    },
-    {
-      label: "Quit",
-      click: () => app.exit(),
-    },
-  ];
+  const menu = [];
 
+  // History lives at the very top (closest to the cursor), collapsed into a
+  // submenu. Disabled when there's nothing recorded yet.
   const recent = history.history.filter((e) => e.files && e.files.length !== 0);
-  if (recent.length !== 0) {
-    menu.push({ type: "separator" });
+  if (recent.length === 0) {
     menu.push({ label: "History", enabled: false });
-
-    // Most recent first, capped at 5 shown in the menu.
-    recent
+  } else {
+    // Most recent first, capped at 5, each clickable to reopen.
+    const historyItems = recent
       .slice(-5)
       .reverse()
-      .forEach((entry) => {
-        menu.push({
-          label: `${formatTimestamp(entry.instanceId)}  —  ${summariseFiles(entry.files)}`,
-          click: () => reopenFromHistory(entry.files),
-        });
-      });
+      .map((entry) => ({
+        label: `${formatTimestamp(entry.instanceId)}  —  ${summariseFiles(entry.files)}`,
+        click: () => reopenFromHistory(entry.files),
+      }));
+
+    historyItems.push({ type: "separator" });
+    historyItems.push({
+      label: "Clear history",
+      click: async () => {
+        await clearHistory();
+        refreshTrayMenu();
+      },
+    });
+
+    menu.push({ label: "History", submenu: historyItems });
   }
+
+  menu.push({ type: "separator" });
+  menu.push({ label: "New Instance", click: () => new Instance().createNewWindow() });
+  menu.push({ label: "Settings", click: () => new Settings().openSettings() });
+  menu.push({ label: "Quit", click: () => app.exit() });
 
   return menu;
 };

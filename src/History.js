@@ -77,7 +77,19 @@ const addToInstanceHistory = async (instanceId, files, max = 20) => {
   }
 };
 
+/**
+ * Clears all recorded history.
+ */
+const clearHistory = async () => {
+  try {
+    await setHistory({ history: [] });
+  } catch (e) {
+    console.error("Failed to clear instance history:", e);
+  }
+};
+
 module.exports = {
   getHistory: getHistory,
   addToInstanceHistory: addToInstanceHistory,
+  clearHistory: clearHistory,
 };
