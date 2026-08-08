@@ -11,7 +11,7 @@ const setShortcut = () => {
 
   if (process.platform === "darwin") {
     //caps lock is not a modifier in mac
-    shortcut = "Shift+Tab";
+    shortcut = "Option+Tab";
 
     //handle macos cmd q quitting
     globalShortcut.register("Cmd+Q", () => {
